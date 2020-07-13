@@ -1,0 +1,11 @@
+[31-Mar-2019 07:50:08 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT * FROM supplier_details  order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/supplier/getSupplierDetails.php(111): MysqliDb->rawQuery('SELECT * FROM s...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775
+[01-May-2019 18:16:18 UTC] PHP Fatal error:  Uncaught Error: Class 'ZipArchive' not found in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php:210
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/supplier/generateReportExcel.php(86): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('/home/w4p4sugpp...')
+#1 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php on line 210

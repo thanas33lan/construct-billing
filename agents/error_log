@@ -1,0 +1,6 @@
+[31-Mar-2019 07:49:34 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT * FROM agent_details  order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/agents/getAgentDetails.php(111): MysqliDb->rawQuery('SELECT * FROM a...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775

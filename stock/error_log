@@ -1,0 +1,42 @@
+[31-Mar-2019 07:51:05 UTC] PHP Notice:  Undefined index: prdName in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 98
+[31-Mar-2019 07:51:05 UTC] PHP Notice:  Undefined index: actualQty in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 101
+[31-Mar-2019 07:51:05 UTC] PHP Notice:  Undefined index: minimumQty in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 104
+[31-Mar-2019 07:51:05 UTC] PHP Notice:  Undefined index: status in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 107
+[31-Mar-2019 07:51:05 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT pd.product_id,pd.product_name,sd.stock_id,sd.actual_qty,sd.minimum_qty,sd.quantity,sd.actual_price,sd.stock_status FROM stock_details as sd INNER JOIN product_details as pd ON pd.product_id=sd.product_id where sd.actual_qty IS NOT NULL   order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php(130): MysqliDb->rawQuery('SELECT pd.produ...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775
+[31-Mar-2019 07:51:09 UTC] PHP Notice:  Undefined index: prdId in /home/w4p4sugppewy/public_html/billing/stock/compareProducts.php on line 15
+[31-Mar-2019 07:51:09 UTC] PHP Notice:  Undefined index: prdId in /home/w4p4sugppewy/public_html/billing/stock/compareProducts.php on line 15
+[01-Apr-2019 05:29:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/stock/stock-list.php on line 4
+[01-Apr-2019 05:29:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/stock/stock-list.php on line 62
+[01-Apr-2019 05:29:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/stock/stock-list.php on line 70
+[01-Apr-2019 05:29:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/stock/stock-list.php on line 78
+[20-Jul-2019 03:03:50 UTC] PHP Notice:  Undefined index: prdName in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 98
+[20-Jul-2019 03:03:50 UTC] PHP Notice:  Undefined index: actualQty in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 101
+[20-Jul-2019 03:03:50 UTC] PHP Notice:  Undefined index: minimumQty in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 104
+[20-Jul-2019 03:03:50 UTC] PHP Notice:  Undefined index: status in /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php on line 107
+[20-Jul-2019 03:03:50 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT pd.product_id,pd.product_name,sd.stock_id,sd.actual_qty,sd.minimum_qty,sd.quantity,sd.actual_price,sd.stock_status FROM stock_details as sd INNER JOIN product_details as pd ON pd.product_id=sd.product_id where sd.actual_qty IS NOT NULL   order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/stock/getStockDetails.php(130): MysqliDb->rawQuery('SELECT pd.produ...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775
+[16-Nov-2019 03:20:30 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 4
+[16-Nov-2019 03:20:30 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 62
+[16-Nov-2019 03:20:30 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 70
+[16-Nov-2019 03:20:30 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 78
+[01-Dec-2019 16:26:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 4
+[01-Dec-2019 16:26:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 62
+[01-Dec-2019 16:26:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 70
+[01-Dec-2019 16:26:40 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 78
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 4
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 4
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 62
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 70
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 78
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 62
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 70
+[21-Jan-2020 07:13:15 UTC] PHP Notice:  Undefined index: userLoginId in /home/x154w0u7rzl1/var/www/crm/stock/stock-list.php on line 78

@@ -1,0 +1,11 @@
+[31-Mar-2019 07:49:59 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT * FROM client_details as cd LEFT JOIN user_details as ud ON cd.client_added_by=ud.user_id  order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/clients/getClientDetails.php(110): MysqliDb->rawQuery('SELECT * FROM c...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775
+[08-Jul-2019 10:53:00 UTC] PHP Fatal error:  Uncaught Error: Class 'ZipArchive' not found in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php:210
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/clients/generateReportExcel.php(90): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('/home/w4p4sugpp...')
+#1 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php on line 210

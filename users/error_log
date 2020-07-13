@@ -1,0 +1,17 @@
+[31-Mar-2019 07:48:48 UTC] PHP Fatal error:  Uncaught Exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 query: SELECT * FROM user_details  order by  in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php:1775
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php(431): MysqliDb->_prepareQuery()
+#1 /home/w4p4sugppewy/public_html/billing/users/getUserDetails.php(111): MysqliDb->rawQuery('SELECT * FROM u...')
+#2 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/includes/MysqliDb.php on line 1775
+[08-Jul-2019 12:19:38 UTC] PHP Fatal error:  Uncaught Error: Class 'ZipArchive' not found in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php:210
+Stack trace:
+#0 /home/w4p4sugppewy/public_html/billing/users/generateReportExcel.php(85): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('/home/w4p4sugpp...')
+#1 {main}
+  thrown in /home/w4p4sugppewy/public_html/billing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx.php on line 210
+[08-Jul-2019 12:59:06 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 4
+[08-Jul-2019 12:59:06 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 4
+[08-Jul-2019 12:59:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/w4p4sugppewy/public_html/billing/header.php:96) in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 5
+[23-Jul-2019 11:02:54 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 4
+[23-Jul-2019 11:02:54 UTC] PHP Notice:  Undefined index: userLoginId in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 4
+[23-Jul-2019 11:02:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/w4p4sugppewy/public_html/billing/header.php:96) in /home/w4p4sugppewy/public_html/billing/users/user-list.php on line 5
