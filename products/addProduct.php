@@ -103,12 +103,22 @@ foreach ($aResult as $supplier) {
                                         </div>
                                    </div>
                               </div>
+                              <hr>
                               <div class="row">
+                                   <h4 style="margin-left:20px;padding:0px;margin-top:2px;">Stock Details</h4>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <label for="productPrice" class="col-lg-4 control-label">Product Quantity <span class="mandatory">*</span></label>
+                                             <div class="col-lg-7">
+                                                  <input type="text" class="form-control isRequired checkNum" id="actualQty" value="<?php echo $productInfo[0]['qty_available']; ?>" name="actualQty" placeholder="Product Actual Qty" title="Please enter product actual quantity" />
+                                             </div>
+                                        </div>
+                                   </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
                                              <label for="productPrice" class="col-lg-4 control-label">Minimum Quantity <span class="mandatory">*</span></label>
                                              <div class="col-lg-7">
-                                                  <input type="text" class="form-control isRequired checkNum" id="minimumQty" name="minimumQty" placeholder="Product Minimum Qty" title="Please enter product minimum quantity" />
+                                                  <input type="text" class="form-control isRequired checkNum" id="minimumQty" value="<?php echo $productInfo[0]['minimum_qty']; ?>" name="minimumQty" placeholder="Product Minimum Qty" title="Please enter product minimum quantity" />
                                                   <code>Set minimum available Quantity</code>
                                              </div>
                                         </div>

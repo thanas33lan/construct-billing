@@ -40,7 +40,7 @@ try {
                 $sQuery="SELECT * FROM stock_details where product_id=".$_POST['prdName'][$k];
                 $sResult = $db->rawQuery($sQuery);
                 $totalQty = $pResult[0]['qty_available'] + $_POST['prdQty'][$k];
-                $totalStockQty = $sResult[0]['qty_available'] + $_POST['prdQty'][$k];
+                $totalStockQty = $sResult[0]['actual_qty'] + $_POST['prdQty'][$k];
 
                 $db=$db->where('product_id',$_POST['prdName'][$k]);
                 $id = $db->update('product_details',array('qty_available'=>$totalQty));

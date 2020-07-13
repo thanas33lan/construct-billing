@@ -8,10 +8,10 @@ $productInfo = $db->query($productQuery);
 if ($id == '' || !$productInfo[0]['product_id']) {
      header("location:product-list.php");
 }
-//get all supplier details
+
 $aQuery = "SELECT supplier_id,supplier_name FROM supplier_details where supplier_status='active'";
 $aResult = $db->rawQuery($aQuery);
-// var_dump($aResult);die;
+
 $oQuery = "SELECT * FROM options where product_id = $id";
 $oResult = $db->rawQuery($oQuery);
 
@@ -104,9 +104,9 @@ $oResult = $db->rawQuery($oQuery);
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="status" class="col-lg-4 control-label">Status <span class="mandatory">*</span></label>
+                                             <label for="pStatus" class="col-lg-4 control-label">Status <span class="mandatory">*</span></label>
                                              <div class="col-lg-7">
-                                                  <select class="form-control isRequired" name='status' id='status' title="Please select the status">
+                                                  <select class="form-control isRequired" name='pStatus' id='pStatus' title="Please select the status">
                                                        <option value=""> -- Select -- </option>
                                                        <option value="active" <?php echo ($productInfo[0]['product_status'] == 'active') ? "selected='selected'" : "" ?>>Active</option>
                                                        <option value="inactive" <?php echo ($productInfo[0]['product_status'] == 'inactive') ? "selected='selected'" : "" ?>>Inactive</option>
@@ -136,18 +136,6 @@ $oResult = $db->rawQuery($oQuery);
                                              </div>
                                         </div>
                                    </div>
-                                   <div class="col-md-6">
-                                        <div class="form-group">
-                                             <label for="stockStatus" class="col-lg-4 control-label">Stock Status <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
-                                                  <select class="form-control isRequired" name='stockStatus' id='stockStatus' title="Please select the status">
-                                                       <option value=""> -- Select -- </option>
-                                                       <option value="active" <?php echo ($productInfo[0]['product_status'] == 'active') ? "selected='selected'" : "" ?>>Active</option>
-                                                       <option value="inactive" <?php echo ($productInfo[0]['product_status'] == 'inactive') ? "selected='selected'" : "" ?>>Inactive</option>
-                                                  </select>
-                                             </div>
-                                        </div>
-                                   </div>
                               </div>
                          </div>
                          <hr>
@@ -161,7 +149,7 @@ $oResult = $db->rawQuery($oQuery);
                                         <th align="center">Action</th>
                                    </tr>
                               </thead>
-                              <tbody id=" optionTable">
+                              <tbody id="optionTable">
                                    <?php 
                                    if(count($oResult) > 0){
                                         foreach($oResult as $key=>$row){ ?>
@@ -247,7 +235,6 @@ $oResult = $db->rawQuery($oQuery);
      }
 
      function deletedOptionRow(id) {
-          console.log(id);
           deletedRow.push(id);
           $('#deletedRow').val(deletedRow);
      }

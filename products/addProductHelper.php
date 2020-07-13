@@ -16,6 +16,7 @@ try {
             'supplier_id'           => $_POST['supplier'],
             'hsn_code'              => $_POST['hsnCode'],
             'product_price'         => $_POST['productPrice'],
+            'qty_available'         => $_POST['actualQty'],
             'minimum_qty'           => $_POST['minimumQty'],
             'product_tax'           => $_POST['tax'],
             'product_added_by'      => $_SESSION['userId'],
@@ -26,6 +27,7 @@ try {
         $lastId = $db->getInsertId();
         $stockData = array(
             'product_id'    => $lastId,
+            'actual_qty'    => $_POST['actualQty'],
             'actual_price'  => $_POST['productPrice'],
             'minimum_qty'   => $_POST['minimumQty'],
             'stock_status'  => 'active',
