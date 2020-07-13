@@ -148,7 +148,7 @@ $general = new General();
         
         foreach ($rResult as $aRow) {
             $row = array();
-            if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){
+            if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){
                 $row[] = "<a href='javascript:void(0);' id='1' onclick='showDetails(\"".$aRow['product_id']."\",this)'><i class='fa fa-plus'></i></a>";
             }
 	        $row[] = ucwords($aRow['product_name']);
@@ -156,7 +156,7 @@ $general = new General();
             $row[] = $aRow['minimum_qty'];
             $row[] = $aRow['quantity'];
             $row[] = (int)$aRow['actual_qty']-(int)$aRow['quantity'];
-            if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){
+            if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){
                 $row[] = number_format($aRow['actual_price'],2);
             }
             $row[] = '<a href="/products/editProduct.php?id=' . base64_encode($aRow['product_id']) . '" class="btn btn-primary btn-xs" style="margin-right: 2px;" title="Edit"><i class="fa fa-pencil"> Edit</i></a>';

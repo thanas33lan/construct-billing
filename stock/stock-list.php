@@ -1,7 +1,7 @@
 <?php
 $title = "STOCK DETAILS";
 include('../header.php');
-if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){
+if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){
   $editAction = '{"sClass":"center","bSortable":false},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center","bSortable":false}';
 }else{
   $editAction = '{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center"},{"sClass":"center","bSortable":false}';
@@ -59,7 +59,7 @@ if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_
               <table id="stockDataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){?>
+                  <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){?>
                     <th></th>
                   <?php }?>
                   <th>Product Name</th>
@@ -67,7 +67,7 @@ if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_
                   <th>Minimum Quantity</th>
                   <th>Quantity Saled</th>
                   <th>Quantity Remaining</th>
-                  <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){?>
+                  <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){?>
                     <th>Actual Price</th>
                   <?php }?>
                   <th>Action</th>
@@ -75,7 +75,7 @@ if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_
               </thead>
               <tbody>
                 <tr>
-                    <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){?>
+                    <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){?>
                       <th>Actual Price</th>
                       <td colspan="6" class="dataTables_empty">Loading data from server</td>
                       <?php }else{?>

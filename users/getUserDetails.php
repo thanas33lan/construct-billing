@@ -86,7 +86,7 @@ $primaryKey="user_id";
          * Get data to display
         */
         
-       $sQuery="SELECT * FROM user_details WHERE login_id != 'merlin'";
+       $sQuery="SELECT * FROM user_details WHERE login_id != 'tile-admin'";
         
         if (isset($sWhere) && $sWhere != "") {
             $sWhere=' where '.$sWhere;

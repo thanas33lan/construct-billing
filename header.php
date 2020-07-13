@@ -85,7 +85,7 @@ $cmyResult = $db->rawQuery($cmyQuery);
               <!-- Menu Footer-->
               <li class="user-footer">
               <?php 
-              if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin'){?>
+              if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin'){?>
 		            <div class="pull-left">
                   <a href="<?php echo BASE_URL;?>company/profile.php" class="btn btn-default btn-flat">Edit Company profile</a>
                 </div>
@@ -128,7 +128,7 @@ $cmyResult = $db->rawQuery($cmyQuery);
           </span>
 	      </a>
 	      <ul class="treeview-menu">
-            <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin'){?>
+            <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin'){?>
               <li class="allMenu userMenu">
                 <a href="<?php echo BASE_URL;?>users/user-list.php"><i class="fa fa-user"></i> Users</a>
               </li>
@@ -139,7 +139,7 @@ $cmyResult = $db->rawQuery($cmyQuery);
             <li class="allMenu clientMenu">
               <a href="<?php echo BASE_URL;?>clients/client-list.php"><i class="fa fa-user"></i> Clients</a>
             </li>
-            <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin'){?>
+            <?php if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin'){?>
             <li class="allMenu supplierMenu">
               <a href="<?php echo BASE_URL;?>supplier/supplierList.php"><i class="fa fa-user"></i> Suppliers</a>
             </li>

@@ -4,7 +4,7 @@ include('header.php');
 if (!isset($_SESSION['userId']) && $_SESSION['userId'] != "") {
 	header("location:login.php");
 }
-if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] != 'merlin'){
+if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] != 'tile-admin'){
 	header("invoice/create-invoice.php");
 }
 	

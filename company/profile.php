@@ -2,7 +2,7 @@
 ob_start();
 $title = "EDIT PROFILE";
 include('../header.php');
-if(!isset($_SESSION['userLoginId']) || ($_SESSION['userLoginId'] != 'merlin')){
+if(!isset($_SESSION['userLoginId']) || ($_SESSION['userLoginId'] != 'tile-admin')){
      header("location:/users/user-list.php");
 }
 define('UPLOAD_PATH',realpath(__DIR__.DIRECTORY_SEPARATOR.'<?php echo BASE_URL;?>uploads'));

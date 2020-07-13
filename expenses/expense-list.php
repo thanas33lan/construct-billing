@@ -2,7 +2,7 @@
 $title = "EXPENSES";
 include('../header.php');
 //get all user details
-$aQuery="SELECT * FROM user_details where user_status='active' AND login_id != 'merlin'";
+$aQuery="SELECT * FROM user_details where user_status='active' AND login_id != 'tile-admin'";
 $userResult = $db->rawQuery($aQuery);
 //get all suppliers details
 $sQuery="SELECT * FROM supplier_details where supplier_status='active'";

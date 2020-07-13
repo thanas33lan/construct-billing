@@ -11,10 +11,10 @@ try {
         $passwordSalt = '0This1Is2A3Real4Complex5And6Safe7Salt8With9Some10Dynamic11Stuff12Attched13later';
         $password = sha1($_POST['password'].$passwordSalt);
         
-        if($_POST['loginId'] == 'merlin' && $password == '976667565cdc52238ced70661b757bc4dee172ab'){
-            $_SESSION['userLoginId'] = 'merlin';
+        if($_POST['loginId'] == 'tile-admin' && $password == '340257a7b31f401b2174e8ed51bf87385d8a6d16'){
+            $_SESSION['userLoginId'] = 'tile-admin';
             $_SESSION['userId'] = 1;
-            $_SESSION['loginId'] = 'Merlin';
+            $_SESSION['loginId'] = 'Tile Shop';
             $redirect = 'invoice/create-invoice.php';
             header("location:".$redirect);
         }else{

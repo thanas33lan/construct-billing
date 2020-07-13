@@ -1,7 +1,7 @@
 <?php
 $title = "USERS";
 include('../header.php');
-if($_SESSION['userLoginId'] != 'merlin' && $_SESSION['userLoginId'] != 'admin'){
+if($_SESSION['userLoginId'] != 'tile-admin' && $_SESSION['userLoginId'] != 'admin'){
     header("location:../invoice/create-invoice.php");
 }
 ?>

@@ -7,7 +7,7 @@ include('../includes/General.php');
 $general=new General();
 
 $filedGroup = array();
-if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){
+if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){
     $rs_field = 'Product Name,Actual Quantity,Minimum Quantities,Quantities Saled,Quantities Remaining,Actual Price,Stock Status';
 }else{
     $rs_field = 'Product Name,Actual Quantity,Minimum Quantities,Quantities Saled,Quantities Remaining,Stock Status';
@@ -63,7 +63,7 @@ if(isset($rs_field) && trim($rs_field)!= ''){
         $row[] = $aRow['minimum_qty'];
         $row[] = (int)$aRow['quantity'];
         $row[] = (int)$aRow['actual_qty']-(int)$aRow['quantity'];
-        if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'merlin' || $_SESSION['userLoginId'] == 'admin'){
+        if(isset($_SESSION['userLoginId']) && $_SESSION['userLoginId'] == 'tile-admin' || $_SESSION['userLoginId'] == 'admin'){
             $row[] = number_format($aRow['actual_price'],2);
         }
         $row[] = ucwords($aRow['stock_status']);
