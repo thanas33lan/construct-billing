@@ -24,7 +24,7 @@ include('../header.php');
                <!-- /.box-header -->
                <div class="box-body">
                     <!-- form start -->
-                    <form class="form-horizontal" method='post'  name='supplierForm' id='supplierForm' autocomplete="off" action="addSupplierHelper.php">
+                    <form class="form-horizontal" method='post' name='supplierForm' id='supplierForm' autocomplete="off" action="addSupplierHelper.php">
                          <div class="box-body">
                               <div class="row">
                                    <div class="col-md-6">
@@ -39,26 +39,26 @@ include('../header.php');
                                         <div class="form-group">
                                              <label for="phoneNo" class="col-lg-4 control-label">Phone Number <span class="mandatory">*</span></label>
                                              <div class="col-lg-7">
-                                                  <input type="text" class="form-control checkNum isRequired" id="phoneNo" name="phoneNo" placeholder="Phone Number" title="Please enter phone number"/>
+                                                  <input type="text" class="form-control checkNum isRequired" id="phoneNo" name="phoneNo" placeholder="Phone Number" title="Please enter phone number" />
                                              </div>
                                         </div>
                                    </div>
                               </div>
-                             
+
                               <div class="row">
-                                <div class="col-md-6">
+                                   <div class="col-md-6">
                                         <div class="form-group">
                                              <label for="phoneNo" class="col-lg-4 control-label">Alter Phone Number </label>
                                              <div class="col-lg-7">
-                                                  <input type="text" class="form-control checkNum " id="alterPhoneNo" name="alterPhoneNo" placeholder="Phone Number" title="Please enter phone number"/>
+                                                  <input type="text" class="form-control checkNum " id="alterPhoneNo" name="alterPhoneNo" placeholder="Phone Number" title="Please enter phone number" />
                                              </div>
                                         </div>
                                    </div>
-                                <div class="col-md-6">
+                                   <div class="col-md-6">
                                         <div class="form-group">
                                              <label for="supplierName" class="col-lg-4 control-label">Address <span class="mandatory">*</span></label>
                                              <div class="col-lg-7">
-                                                  <textarea class="form-control isRequired" id="supplierAddress" name="supplierAddress" placeholder="Supplier Name" title="Please enter supplier address" ></textarea>
+                                                  <textarea class="form-control isRequired" id="supplierAddress" name="supplierAddress" placeholder="Address" title="Please enter supplier address"></textarea>
                                              </div>
                                         </div>
                                    </div>
@@ -71,7 +71,7 @@ include('../header.php');
                                         </div>
                                    </div>
                               </div>
-                              
+
                          </div>
                          <!-- /.box-body -->
                          <div class="box-footer">
@@ -90,29 +90,34 @@ include('../header.php');
      <!-- /.content -->
 </div>
 <script type="text/javascript">
-function validateNow(){
-     flag = deforayValidator.init({
-          formId: 'supplierForm'
-     });
-     if(flag){
-        $.blockUI();
-        document.getElementById('supplierForm').submit();
-     }
-}
-
-function checkNameValidation(tableName,fieldName,obj,fnct,alrt,callback){
-     var removeDots=obj.value.replace(/\,/g,"");
-     //str=obj.value;
-     removeDots = removeDots.replace(/\s{2,}/g,' ');
-     $.post("../includes/checkDuplicate.php", { tableName: tableName,fieldName : fieldName ,value : removeDots.trim(),fnct : fnct, format: "html"},
-     function(data){
-          if(data==='1'){
-               alert(alrt);
-               document.getElementById(obj.id).value="";
+     function validateNow() {
+          flag = deforayValidator.init({
+               formId: 'supplierForm'
+          });
+          if (flag) {
+               $.blockUI();
+               document.getElementById('supplierForm').submit();
           }
-     });
-}
+     }
 
+     function checkNameValidation(tableName, fieldName, obj, fnct, alrt, callback) {
+          var removeDots = obj.value.replace(/\,/g, "");
+          //str=obj.value;
+          removeDots = removeDots.replace(/\s{2,}/g, ' ');
+          $.post("../includes/checkDuplicate.php", {
+                    tableName: tableName,
+                    fieldName: fieldName,
+                    value: removeDots.trim(),
+                    fnct: fnct,
+                    format: "html"
+               },
+               function(data) {
+                    if (data === '1') {
+                         alert(alrt);
+                         document.getElementById(obj.id).value = "";
+                    }
+               });
+     }
 </script>
 <?php
 include('../footer.php');

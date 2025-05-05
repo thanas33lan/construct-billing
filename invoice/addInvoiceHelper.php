@@ -43,17 +43,8 @@ try {
             'bill_status' => 'pending',
             'bill_added_on' => date('Y-m-d H:i:s'),
 
-            'delivery_note' => $_POST['deliveryNote'],
             'term_payment' => $_POST['termPayment'],
-            'supplier_ref' => $_POST['supplierRef'],
-            'other_ref' => $_POST['otherRef'],
-            'buyer_order_no' => $_POST['buyerOrderNo'],
-            'buyer_date' => $_POST['buyerDate'],
-            'dispatch_doc_no' => $_POST['docNo'],
-            'delivery_note_date' => $_POST['deliveryNoteDate'],
-            'dispatch_through' => $_POST['disThrough'],
-            'destination' => $_POST['destination'],
-            'term_delivery' => $_POST['termDelivery'],
+            'supplier_ref' => $_POST['supplierRef']
         );
 
         $id = $db->insert($billTable, $data);
@@ -62,11 +53,11 @@ try {
             $c = count($_POST['prdName']);
             $lastId = $db->getInsertId();
             for ($k = 0; $k < $c; $k++) {
-                if(!is_numeric($_POST['prdName'][$k])){
+                if (!is_numeric($_POST['prdName'][$k])) {
                     $peQuery = "SELECT * FROM product_details where product_name='" . $_POST['prdName'][$k] . "'";
                     $peResult = $db->rawQuery($peQuery);
-                    if(empty($peResult[0]['product_name']) && trim($peResult[0]['product_name']) == ''){
-                        $pData=array(
+                    if (empty($peResult[0]['product_name']) && trim($peResult[0]['product_name']) == '') {
+                        $pData = array(
                             'product_name'          => $_POST['prdName'][$k],
                             'product_description'   => $_POST['prdDesc'][$k],
                             'product_price'         => $_POST['prdPrice'][$k],
@@ -76,7 +67,7 @@ try {
                             'product_added_on'      => date('Y-m-d H:i:s'),
                             'product_status'        => 'active'
                         );
-                        $id = $db->insert('product_details',$pData);
+                        $id = $db->insert('product_details', $pData);
                         $lastProductId = $db->getInsertId();
                         $stockData = array(
                             'product_id'    => $lastProductId,
@@ -84,10 +75,10 @@ try {
                             'minimum_qty'   => 10,
                             'stock_status'  => 'active'
                         );
-                        $stockId = $db->insert('stock_details',$stockData);
+                        $stockId = $db->insert('stock_details', $stockData);
                         $_POST['prdName'][$k] = $lastProductId;
                         $_POST['productId'][$k] = $lastProductId;
-                    }else{
+                    } else {
                         $_POST['prdName'][$k] = $peResult[0]['product_id'];
                         $_POST['productId'][$k] = $peResult[0]['product_id'];
                     }

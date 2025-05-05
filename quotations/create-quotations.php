@@ -38,7 +38,7 @@ $aResult = $db->rawQuery($aQuery);
 
 $productList = '';
 foreach ($pResult as $prd) {
-    $productList .= '<option value="' . $prd['product_id'] . '"data-description="'.$prd['product_description'].'" data-id="' . $prd['product_id'] . '" data-hsn="' . $prd['hsn_code'] . '" data-price="' . $prd['product_price'] . '" data-gst="' . $prd['product_tax'] . '" data-qty="' . $prd['qty_available'] . '" data-mini-qty="' . $prd['minimum_qty'] . '">' . $prd['product_name'] . '</option>';
+    $productList .= '<option value="' . $prd['product_id'] . '"data-description="' . $prd['product_description'] . '" data-id="' . $prd['product_id'] . '" data-hsn="' . $prd['hsn_code'] . '" data-price="' . $prd['product_price'] . '" data-gst="' . $prd['product_tax'] . '" data-qty="' . $prd['qty_available'] . '" data-mini-qty="' . $prd['minimum_qty'] . '">' . $prd['product_name'] . '</option>';
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -122,7 +122,6 @@ foreach ($pResult as $prd) {
                                 <th rowspan="2" style="width:20%;">Product Name </th>
                                 <th rowspan="2" style="width:15%;">Product Description </th>
                                 <th rowspan="2" style="width:10%;">INR <i class="fa fa-inr"></i> </th>
-                                <th rowspan="2" style="width:10%;">Sqft </th>
                                 <th rowspan="2" style="width:10%;">Qty </th>
                                 <th rowspan="2" style="width:10%;">Discount <i class="fa fa-percent"></i></th>
                                 <th rowspan="2" style="width:15%;">Line Total </th>
@@ -140,7 +139,6 @@ foreach ($pResult as $prd) {
                                 </td>
                                 <td><textarea name="prdDesc[]" id="prdDesc1" class="form-control" title="Enter other product description"></textarea></td>
                                 <td><input type="number" class="form-control" name="prdPrice[]" id="prdPrice1" onchange="updateTotalPrice(1)" /></td>
-                                <td><input type="text" class="form-control" name="sqft[]" id="sqft1" title="Please enter the sqft."></td>
                                 <td><input type="text" class="form-control isRequired" name="prdQty[]" id="prdQty1" title="Enter Quantity" onchange="updateTotalPrice(1)" /></td>
                                 <td><input type="text" class="form-control" name="discount[]" id="discount1" title="Enter discount" onchange="updateTotalPrice(1)" /></td>
                                 <td><input type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal1" title="Enter Total" readonly /></td>
@@ -305,19 +303,17 @@ foreach ($pResult as $prd) {
         var f = a.insertCell(4);
         var g = a.insertCell(5);
         var h = a.insertCell(6);
-        var i = a.insertCell(7);
-        i.setAttribute("align", "center");
-        i.setAttribute("style", "vertical-align:middle;");
-        i.setAttribute("style", "display: inline-flex;");
+        h.setAttribute("align", "center");
+        h.setAttribute("style", "vertical-align:middle;");
+        h.setAttribute("style", "display: inline-flex;");
 
         b.innerHTML = '<select name="prdName[]" id="prdName' + tableRowId + '" class="form-control prdName isRequired" title="Enter Product" onchange="checkExistProduct(' + tableRowId + ')"><option value="">-- Select --</option><?php echo $productList; ?><option value="other">Others</option></select>';
         c.innerHTML = '<textarea name="prdDesc[]" id="prdDesc' + tableRowId + '" class="form-control" title="Enter other product description"></textarea>';
         d.innerHTML = '<input type="number" class="form-control" name="prdPrice[]" id="prdPrice' + tableRowId + '" onchange="updateTotalPrice(' + tableRowId + ')"/>';
-        e.innerHTML = '<input type="text" class="form-control" name="sqft[]" id="sqft' + tableRowId + '" title="Please enter the sqft.">';
-        f.innerHTML = '<input type="text" class="form-control isRequired" name="prdQty[]" id="prdQty' + tableRowId + '" title="Enter Quantity"  onchange="updateTotalPrice(' + tableRowId + ')"/>';
-        g.innerHTML = '<input type="text" class="form-control" name="discount[]" id="discount' + tableRowId + '" title="Enter discount"  onchange="updateTotalPrice(' + tableRowId + ')"/>';
-        h.innerHTML = '<input type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal' + tableRowId + '" title="Enter Total" readonly/>';
-        i.innerHTML = '<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributeRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>';
+        e.innerHTML = '<input type="text" class="form-control isRequired" name="prdQty[]" id="prdQty' + tableRowId + '" title="Enter Quantity"  onchange="updateTotalPrice(' + tableRowId + ')"/>';
+        f.innerHTML = '<input type="text" class="form-control" name="discount[]" id="discount' + tableRowId + '" title="Enter discount"  onchange="updateTotalPrice(' + tableRowId + ')"/>';
+        g.innerHTML = '<input type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal' + tableRowId + '" title="Enter Total" readonly/>';
+        h.innerHTML = '<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributeRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>';
         $(a).fadeIn(800);
         /* $("#prdName" + tableRowId).select2({
             placeholder: "Select product name",
@@ -418,7 +414,7 @@ foreach ($pResult as $prd) {
         var itemLength = itemCount.length - 1;
         var k = 0;
         for (i = 0; i <= itemLength; i++) {
-            if ( itemId== itemCount[i].value) {
+            if (itemId == itemCount[i].value) {
                 k++;
             }
         }

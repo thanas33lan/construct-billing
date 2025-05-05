@@ -84,8 +84,8 @@ $cResult = $db->rawQuery($cQuery);
 	$(document).ready(function() {
 		$("#customerName").select2({
 			placeholder: "Enter customer name",
-			width:'250px',
-			allowClear:true,
+			width: '250px',
+			allowClear: true,
 			maximumSelectionLength: 2
 		});
 		$('#invoiceDate').daterangepicker({
@@ -118,7 +118,7 @@ $cResult = $db->rawQuery($cQuery);
 		var customerId = $("#customerName").val();
 		var invoiceDate = $("#invoiceDate").val();
 		if (customerId != '' || invoiceDate != '') {
-			$.blockUI();
+			// $.blockUI();
 			$.post("getCustomerHistory.php", {
 					customerId: customerId,
 					invoiceDate: invoiceDate
@@ -140,7 +140,7 @@ $cResult = $db->rawQuery($cQuery);
 	function generatePDF() {
 		if ($("#customerName").val() != '' || $("#invoiceDate").val() != '') {
 			$.blockUI();
-			window.open("/invoice/generateVoucherPdf.php?customerId="+$("#customerName").val()+"&invoiceDate"+$("#invoiceDate").val()+"", '_blank');
+			window.open("/invoice/generateVoucherPdf.php?customerId=" + $("#customerName").val() + "&invoiceDate=" + $("#invoiceDate").val() + "", '_blank');
 			$.unblockUI();
 			/* $.post("generateVoucherPdf.php", {
 				customerId: customerId,

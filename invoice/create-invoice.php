@@ -37,7 +37,7 @@ $aResult = $db->rawQuery($aQuery);
 
 $productList = '';
 foreach ($pResult as $prd) {
-    $productList .= '<option value="' . $prd['product_id'] . '"data-description="'.$prd['product_description'].'" data-id="' . $prd['product_id'] . '" data-hsn="' . $prd['hsn_code'] . '" data-price="' . $prd['product_price'] . '" data-gst="' . $prd['product_tax'] . '" data-qty="' . $prd['qty_available'] . '" data-mini-qty="' . $prd['minimum_qty'] . '">' . $prd['product_name'] . '</option>';
+    $productList .= '<option value="' . $prd['product_id'] . '"data-description="' . $prd['product_description'] . '" data-id="' . $prd['product_id'] . '" data-hsn="' . $prd['hsn_code'] . '" data-price="' . $prd['product_price'] . '" data-gst="' . $prd['product_tax'] . '" data-qty="' . $prd['qty_available'] . '" data-mini-qty="' . $prd['minimum_qty'] . '">' . $prd['product_name'] . '</option>';
 }
 
 $agentDetail = '';
@@ -94,18 +94,18 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceDueDate" class="col-lg-4 control-label">Invoice Due Date </label>
+                                    <label for="clientName" class="col-lg-4 control-label">Client Name </label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="invoiceDueDate" name="invoiceDueDate" placeholder="Invoice Due Date" title="Please choose date" />
+                                        <select class="form-control isRequired" id="clientName" name="clientName">
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientName" class="col-lg-4 control-label">Client Name </label>
+                                    <label for="clientMobile" class="col-lg-4 control-label">Client Mobile</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control isRequired" id="clientName" name="clientName">
-                                        </select>
+                                        <input type="text" class="form-control" name="clientMobile" id="clientMobile" placeholder="Client Mobile" title="Client mobile number" />
                                     </div>
                                 </div>
                             </div>
@@ -132,25 +132,6 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientMobile" class="col-lg-4 control-label">Client Mobile</label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="clientMobile" id="clientMobile" placeholder="Client Mobile" title="Client mobile number" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="deliveryNote" class="col-lg-4 control-label">Delivery Note </label>
-                                    <div class="col-lg-7">
-                                        <textarea type="text" class="form-control" id="deliveryNote" name="deliveryNote" placeholder="Delivery Note" title="Please enter delivery note"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
                                     <label for="termPayment" class="col-lg-4 control-label">Mode/Terms of Payment </label>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" name="termPayment" id="termPayment" placeholder="Terms of Payment" title="Terms of Payment" />
@@ -159,90 +140,13 @@ foreach ($aResult as $agent) {
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="supplierRef" class="col-lg-4 control-label">Supplier's Ref </label>
+                                    <label for="supplierRef" class="col-lg-4 control-label">Supplier/Delivery Person Name </label>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" name="supplierRef" id="supplierRef" placeholder="Reference" title="Supplier Reference" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="otherRef" class="col-lg-4 control-label">Other Reference(s) </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="otherRef" id="otherRef" placeholder="Reference" title="Other Reference" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="buyerOrderNo" class="col-lg-4 control-label">Buyer Order No </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" value="<?php echo $buyNo; ?>" class="form-control" name="buyerOrderNo" id="buyerOrderNo" placeholder="Order Number" title="Order Number" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="buyerDate" class="col-lg-4 control-label">Dated </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="buyerDate" id="buyerDate" placeholder="Buyer Date" title="Buyer Date" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="docNo" class="col-lg-4 control-label">Dispatch Document No </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" value="<?php echo $docxNo; ?>" class="form-control" name="docNo" id="docNo" placeholder="Document Number" title="Document Number" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="deliveryNoteDate" class="col-lg-4 control-label">Delivery Note Date </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="deliveryNoteDate" id="deliveryNoteDate" placeholder="Note Date" title="Note date" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="disThrough" class="col-lg-4 control-label">Dispatch Through </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="disThrough" id="disThrough" placeholder="Dispatch through" title="Dispatch through" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="destination" class="col-lg-4 control-label">Destination </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="destination" id="destination" placeholder="Destination" title="Destination" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="termDelivery" class="col-lg-4 control-label">Terms Of Delivery </label>
-                                    <div class="col-lg-7">
-                                        <textarea class="form-control" name="termDelivery" id="termDelivery" placeholder="Terms Of Delivery" title="Terms Of Delivery"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- </div> -->
                     </div>
                     <div class="box-header">
@@ -254,7 +158,6 @@ foreach ($aResult as $agent) {
                             <tr>
                                 <th rowspan="2"><i class="fa fa-check"></i></th>
                                 <th rowspan="2">Product Name </th>
-                                <th rowspan="2">Sqft </th>
                                 <th rowspan="2">INR <i class="fa fa-inr"></i> </th>
                                 <th rowspan="2">Qty </th>
                                 <th rowspan="2">Tax <i class="fa fa-percent"></i> </th>
@@ -281,7 +184,7 @@ foreach ($aResult as $agent) {
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="prdChk[]" id="1" style=" margin-left: -4px; "/>
+                                                <input type="checkbox" name="prdChk[]" id="1" style=" margin-left: -4px; " />
                                             </label>
                                         </div>
                                     </div>
@@ -294,16 +197,7 @@ foreach ($aResult as $agent) {
                                     <br>
                                     <textarea name="prdDesc[]" id="prdDesc1" class="form-control" title="Enter other product description" placeholder="Enter the product description"></textarea>
                                 </td>
-                                <td><input style="width:100%;" type="text" class="form-control" name="sqft[]" id="sqft1" onchange="taxCalculation(1);checkProductQty(1);" onkeyup="taxCalculation(1)" onblur="taxCalculation(1);"/><br>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="sqftCheck[]" id="sqftCheck1" style=" margin-left: -4px; " onchange="updateTotalPrice(1);"/>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;Calc Sqft</label>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="hsnCode[]" id="hsnCode1"/> </td>
-                                <td><input style="width:100%;" type="text" class="form-control" name="prdPrice[]" id="prdPrice1"  onchange="updateTotalPrice(1);" onkeyup="chenge(this.value,1);updateTotalPrice(1);"/></td>
+                                <td><input style="width:100%;" type="text" class="form-control" name="prdPrice[]" id="prdPrice1" onchange="updateTotalPrice(1);" onkeyup="chenge(this.value,1);updateTotalPrice(1);" /></td>
                                 <td><input style="width:100%;" type="text" class="form-control isRequired" name="prdQty[]" id="prdQty1" title="Enter Quantity" onchange="taxCalculation(1);checkProductQty(1);" onkeyup="taxCalculation(1)" onblur="taxCalculation(1);" /></td>
                                 <td><input style="width:100%;" type="text" class="form-control isRequired" name="tax[]" id="tax1" title="Enter Tax" onchange="taxCalculation(1)" onkeyup="taxCalculation(1);chenge(this.value,1);" onblur="taxCalculation(1)" /><input type="hidden" id="taxAmtSpan1" /></td>
                                 <td><input style="width:100%;" type="text" class="form-control isRequired" name="taxablePrice[]" id="taxablePrice1" title="" /></td>
@@ -314,7 +208,7 @@ foreach ($aResult as $agent) {
                                 <td style="background-color: antiquewhite;"><input style="width:100%;" type="text" class="form-control" name="igstTax[]" id="igstTax1" /></td>
                                 <td style="background-color: antiquewhite;"><input style="width:100%;" type="text" class="form-control" name="igstAmt[]" id="igstAmt1" /></td>
                                 <td><input style="width:100%;" type="text" class="form-control" name="discount[]" id="discount1" title="Enter discount" onchange="taxCalculation(1)" /></td>
-                                <td><input style="width:100%;" type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal1" title="Enter Total" readonly/></td>
+                                <td><input style="width:100%;" type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal1" title="Enter Total" readonly /></td>
                                 <td align="center" style="vertical-align:middle;width:100%;display: inline-flex;">
                                     <a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributeRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>
                                 </td>
@@ -326,10 +220,10 @@ foreach ($aResult as $agent) {
                                 <td colspan="2"><a href="javascript:void(0);" class="btn btn-sm btn-info " onclick="taxCalculation(null,'click');"><b>Switch GST</b></a></td>
                                 <!-- <td><a href="javascript:void(0);" class="btn btn-sm btn-info " onclick="taxWithout();"><b>Without GST</b></a></td> -->
                                 <td colspan="4"><strong style="float:right;">Taxable Total Price</strong></td>
-                                <td><input style="width:100%;" type="text" id="taxableGrandTotal" name="taxableGrandTotal" class="form-control checkNum"/></td>
-                                <td colspan="2" style="background-color: antiquewhite;"><input style="width:100%;" type="text" id="cgstTaxTotal" name="cgstTaxTotal" class="form-control checkNum"/></td>
-                                <td colspan="2" style="background-color: aliceblue;"><input style="width:100%;" type="text" id="sgstTaxTotal" name="sgstTaxTotal" class="form-control checkNum"/></td>
-                                <td colspan="2" style="background-color: antiquewhite;"><input style="width:100%;" type="text" id="igstTaxTotal" name="igstTaxTotal" class="form-control checkNum"/></td>
+                                <td><input style="width:100%;" type="text" id="taxableGrandTotal" name="taxableGrandTotal" class="form-control checkNum" /></td>
+                                <td colspan="2" style="background-color: antiquewhite;"><input style="width:100%;" type="text" id="cgstTaxTotal" name="cgstTaxTotal" class="form-control checkNum" /></td>
+                                <td colspan="2" style="background-color: aliceblue;"><input style="width:100%;" type="text" id="sgstTaxTotal" name="sgstTaxTotal" class="form-control checkNum" /></td>
+                                <td colspan="2" style="background-color: antiquewhite;"><input style="width:100%;" type="text" id="igstTaxTotal" name="igstTaxTotal" class="form-control checkNum" /></td>
                                 <td colspan="2"><input style="width:100%;" type="text" id="grandTotal" name="grandTotal" class="form-control isRequired checkNum" placeholder="Grand Total" title="Grand Total for this order" /></td>
                             </tr>
                         </tfoot>
@@ -351,26 +245,26 @@ foreach ($aResult as $agent) {
                             </tr>
 
                         </thead>
-                        <tbody id="payTable">
-                            <tr>
-                                <td>
-                                    <select name="payOption[]" id="payOption1" class="form-control " title="Choose option" onchange="showHideEmi(this,1)">
-                                        <option value="">-- Select --</option>
-                                        <option value="cash">Cash</option>
-                                        <option value="cheque">Cheque</option>
-                                        <option value="online">Online</option>
-                                        <!-- <option value="emi">EMI</option> -->
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control isRequired" id="paidOn1" name="paidOn[]" placeholder="Paid Date" title="Please choose date" readonly />
-                                </td>
-                                <td><textarea name="payDetails[]" id="payDetails1" class="form-control" placeholder="Enter Details"></textarea></td>
-                                <td><input type="text" name="payAmt[]" id="payAmt1" class="form-control" placeholder="Amount" onkeyup="updatepayTotal()" /></td>
-                                <td align="center" style="vertical-align:middle;">
-                                    <a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insPayRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributePayRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>
-                                </td>
-                            </tr>
+                        <tbody id=" payTable">
+                        <tr>
+                            <td>
+                                <select name="payOption[]" id="payOption1" class="form-control " title="Choose option" onchange="showHideEmi(this,1)">
+                                    <option value="">-- Select --</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="online">Online</option>
+                                    <!-- <option value="emi">EMI</option> -->
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control isRequired" id="paidOn1" name="paidOn[]" placeholder="Paid Date" title="Please choose date" readonly />
+                            </td>
+                            <td><textarea name="payDetails[]" id="payDetails1" class="form-control" placeholder="Enter Details"></textarea></td>
+                            <td><input type="text" name="payAmt[]" id="payAmt1" class="form-control" placeholder="Amount" onkeyup="updatepayTotal()" /></td>
+                            <td align="center" style="vertical-align:middle;">
+                                <a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insPayRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributePayRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>
+                            </td>
+                        </tr>
 
                         </tbody>
                         <tfoot>
@@ -478,11 +372,11 @@ foreach ($aResult as $agent) {
                 }
             }
         });
-        $('#invoiceDueDate,#paidOn1,#buyerDate,#deliveryNoteDate').datepicker({
+        $('#invoiceDate,#invoiceDueDate,#paidOn1,#buyerDate,#deliveryNoteDate').datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: 'dd-M-yy',
-            minDate: "Today",
+            // minDate: "Today",
             yearRange: <?php echo (date('Y') - 100); ?> + ":" + "<?php echo (date('Y')) ?>"
         }).click(function() {
             $('.ui-datepicker-calendar').show();
@@ -524,32 +418,30 @@ foreach ($aResult as $agent) {
         var n = a.insertCell(12);
         var o = a.insertCell(13);
         var p = a.insertCell(14);
-        var q = a.insertCell(15);
-        q.setAttribute("align", "center");
-        q.setAttribute("style", "vertical-align:middle");
-        i.setAttribute("style", "background-color: antiquewhite;");
+        p.setAttribute("align", "center");
+        p.setAttribute("style", "vertical-align:middle");
         j.setAttribute("style", "background-color: antiquewhite;");
-        m.setAttribute("style", "background-color: antiquewhite;");
+        k.setAttribute("style", "background-color: antiquewhite;");
         n.setAttribute("style", "background-color: antiquewhite;");
-        k.setAttribute("style", "background-color: aliceblue;");
+        o.setAttribute("style", "background-color: antiquewhite;");
         l.setAttribute("style", "background-color: aliceblue;");
+        m.setAttribute("style", "background-color: aliceblue;");
 
         b.innerHTML = '<div class="form-group"><div class="checkbox"><label><input type="checkbox" name="prdChk[]" id="' + tableRowId + '" style=" margin-left: -4px; "/></label></div></div>';
         c.innerHTML = '<input type="hidden" name="productId[]" id="productId' + tableRowId + '" /><select style="width:100%;" name="prdName[]" id="prdName' + tableRowId + '" class="form-control prdName isRequired" title="Enter Product" onchange="checkExistProduct(' + tableRowId + ')"><option value="">-- Select --</option><?php echo $productList; ?></select><br><textarea name="prdDesc[]" id="prdDesc' + tableRowId + '" class="form-control" title="Enter other product description" placeholder="Enter the product description"></textarea>';
-        d.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="sqft[]" id="sqft' + tableRowId + '" onchange="taxCalculation(' + tableRowId + ');" onkeyup="taxCalculation(' + tableRowId + ')" onchange="taxCalculation(' + tableRowId + ');checkProductQty(' + tableRowId + ');"/><input type="hidden" name="hsnCode[]" id="hsnCode' + tableRowId + '"/><div class="form-group"><div class="checkbox"><label><input type="checkbox" name="sqftCheck[]" id="sqftCheck' + tableRowId + '" style=" margin-left: -4px; " onchange="updateTotalPrice(' + tableRowId + ');"/>&nbsp;&nbsp;&nbsp;&nbsp;Calc Sqft</label></div></div>';
-        e.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="prdPrice[]" id="prdPrice' + tableRowId + '"  onchange=";updateTotalPrice(' + tableRowId + ');" onkeyup="chenge(this.value,' + tableRowId + ');updateTotalPrice(' + tableRowId + ');"/>';
-        f.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="prdQty[]" id="prdQty' + tableRowId + '" title="Enter Quantity" onchange="taxCalculation(' + tableRowId + ');" onkeyup="taxCalculation(' + tableRowId + ')" onchange="taxCalculation(' + tableRowId + ');checkProductQty(' + tableRowId + ');"/>';
-        g.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="tax[]" id="tax' + tableRowId + '" title="Enter Quantity" onchange="taxCalculation(' + tableRowId + ')" onkeyup="taxCalculation(' + tableRowId + ');chenge(this.value,' + tableRowId + ');" onblur="taxCalculation(' + tableRowId + ')"/><input type="hidden" id="taxAmtSpan' + tableRowId + '"/>';
-        h.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="taxablePrice[]" id="taxablePrice' + tableRowId + '" title="" />';
-        i.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="cgstTax[]" id="cgstTax' + tableRowId + '" />';
-        j.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="cgstAmt[]" id="cgstAmt' + tableRowId + '" />';
-        k.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="sgstTax[]" id="sgstTax' + tableRowId + '" />';
-        l.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="sgstAmt[]" id="sgstAmt' + tableRowId + '" />';
-        m.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="igstTax[]" id="igstTax' + tableRowId + '" />';
-        n.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="igstAmt[]" id="igstAmt' + tableRowId + '" />';
-        o.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="discount[]" id="discount' + tableRowId + '" title="Enter discount" onchange="taxCalculation(' + tableRowId + ')"/>';
-        p.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal' + tableRowId + '" title="Enter Total" readonly/>';
-        q.innerHTML = '<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributeRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>';
+        d.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="prdPrice[]" id="prdPrice' + tableRowId + '"  onchange=";updateTotalPrice(' + tableRowId + ');" onkeyup="chenge(this.value,' + tableRowId + ');updateTotalPrice(' + tableRowId + ');"/>';
+        e.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="prdQty[]" id="prdQty' + tableRowId + '" title="Enter Quantity" onchange="taxCalculation(' + tableRowId + ');" onkeyup="taxCalculation(' + tableRowId + ')" onchange="taxCalculation(' + tableRowId + ');checkProductQty(' + tableRowId + ');"/>';
+        f.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="tax[]" id="tax' + tableRowId + '" title="Enter Quantity" onchange="taxCalculation(' + tableRowId + ')" onkeyup="taxCalculation(' + tableRowId + ');chenge(this.value,' + tableRowId + ');" onblur="taxCalculation(' + tableRowId + ')"/><input type="hidden" id="taxAmtSpan' + tableRowId + '"/>';
+        g.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="taxablePrice[]" id="taxablePrice' + tableRowId + '" title="" />';
+        h.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="cgstTax[]" id="cgstTax' + tableRowId + '" />';
+        i.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="cgstAmt[]" id="cgstAmt' + tableRowId + '" />';
+        j.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="sgstTax[]" id="sgstTax' + tableRowId + '" />';
+        k.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="sgstAmt[]" id="sgstAmt' + tableRowId + '" />';
+        l.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="igstTax[]" id="igstTax' + tableRowId + '" />';
+        m.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="igstAmt[]" id="igstAmt' + tableRowId + '" />';
+        n.innerHTML = '<input style="width:100%;" type="text" class="form-control" name="discount[]" id="discount' + tableRowId + '" title="Enter discount" onchange="taxCalculation(' + tableRowId + ')"/>';
+        o.innerHTML = '<input style="width:100%;" type="text" class="form-control isRequired" name="lineTotal[]" id="lineTotal' + tableRowId + '" title="Enter Total" readonly/>';
+        p.innerHTML = '<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="insRow();"><i class="fa fa-plus"></i></a>&nbsp;<a class="btn btn-xs btn-default" href="javascript:void(0);" onclick="removeAttributeRow(this.parentNode.parentNode);"><i class="fa fa-minus"></i></a>';
         $(a).fadeIn(800);
         $("#prdName" + tableRowId).select2({
             placeholder: "Enter product name",
@@ -725,9 +617,9 @@ foreach ($aResult as $agent) {
                     // var price = $("#prdName" + rowId).find(':selected').attr('data-price');
                     var price = $("#prdPrice" + rowId).val();
                     var tax = $("#tax" + rowId).val();
-                    if($('#sqftCheck' + rowId).prop("checked") == true){
+                    if ($('#sqftCheck' + rowId).prop("checked") == true) {
                         $("#taxablePrice" + rowId).val(price * $("#sqft" + rowId).val());
-                    }else{
+                    } else {
                         $("#taxablePrice" + rowId).val(price * $("#prdQty" + rowId).val());
                     }
                     var taxDivision = tax / 2;
@@ -740,9 +632,9 @@ foreach ($aResult as $agent) {
                         $("#igstTax" + rowId).val('');
                         $("#igstAmt" + rowId).val('');
                     } else {
-                        if($('#sqftCheck' + rowId).prop("checked") == true){
+                        if ($('#sqftCheck' + rowId).prop("checked") == true) {
                             $("#taxablePrice" + rowId).val(price * $("#sqft" + rowId).val());
-                        }else{
+                        } else {
                             $("#taxablePrice" + rowId).val(price * $("#prdQty" + rowId).val());
                         }
                         var taxDivision = tax;
@@ -766,15 +658,15 @@ foreach ($aResult as $agent) {
             var price = $("#prdPrice" + rowId).val();
             var tax = $("#tax" + rowId).val();
             if (tax != '') {
-                if($('#sqftCheck' + rowId).prop("checked") == true){
+                if ($('#sqftCheck' + rowId).prop("checked") == true) {
                     $("#taxablePrice" + rowId).val(price * $("#sqft" + rowId).val());
-                }else{
+                } else {
                     $("#taxablePrice" + rowId).val(price * $("#prdQty" + rowId).val());
                 }
                 var taxDivision = tax / 2;
-                if($('#sqftCheck' + rowId).prop("checked") == true){
+                if ($('#sqftCheck' + rowId).prop("checked") == true) {
                     var taxCalc = (parseInt(price) * taxDivision / 100) * $("#sqft" + rowId).val();
-                }else{
+                } else {
                     var taxCalc = (parseInt(price) * taxDivision / 100) * $("#prdQty" + rowId).val();
                 }
                 if ($("#igstTax" + rowId).val() == '') {
@@ -820,21 +712,21 @@ foreach ($aResult as $agent) {
         var igstAmt = document.getElementsByName("igstAmt[]");
         for (i = 0; i < unitPrice.length; i++) {
             if (unitPrice[i].value != "" && (qty[i].value != "" || sqft[i].value != "")) {
-                if($('#sqftCheck' + (i+1)).prop("checked") == true){
+                if ($('#sqftCheck' + (i + 1)).prop("checked") == true) {
                     if (sqft[i].value == 0) {
                         alert("Sorry! You can not add ZERO square feet.")
                         sqft[i].value = 1;
                     }
-                } else{
+                } else {
 
                     if (qty[i].value == 0) {
                         alert("Sorry! You can not add ZERO quantity.")
                         qty[i].value = 1;
                     }
                 }
-                if($('#sqftCheck' + (i+1)).prop("checked") == true){
+                if ($('#sqftCheck' + (i + 1)).prop("checked") == true) {
                     unitQty = parseFloat(unitPrice[i].value) * parseFloat(sqft[i].value);
-                }else{
+                } else {
                     unitQty = parseFloat(unitPrice[i].value) * parseFloat(qty[i].value);
                 }
                 cgstTotal += (cgstAmt[i].value != '' && cgstAmt[i].value != 0) ? parseFloat(cgstAmt[i].value) : parseFloat(0);
@@ -865,7 +757,7 @@ foreach ($aResult as $agent) {
         var k = 0;
         for (i = 0; i <= itemLength; i++) {
             if (itemId == itemCount[i].value) {
-                if(itemCount[i].value != '' && itemId != ''){
+                if (itemCount[i].value != '' && itemId != '') {
                     k++;
                 }
             }
