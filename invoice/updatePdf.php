@@ -36,16 +36,24 @@ if ($id == '' || !$bResult[0]['bill_id']) {
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="termPayment" class="col-lg-4 control-label">Mode/Terms of Payment </label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="invoiceDueDate" class="control-label">Invoice Due Date </label>
+                                                  <input type="text" class="form-control" id="invoiceDueDate" name="invoiceDueDate" placeholder="Invoice due date" title="Please choose due date" readonly value="<?php echo date('d-M-Y'); ?>" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <div class="col-lg-12">
+                                                  <label for="termPayment" class="control-label">Mode/Terms of Payment </label>
                                                   <input type="text" class="form-control" name="termPayment" id="termPayment" placeholder="Terms of Payment" title="Terms of Payment" value="<?php echo $bResult[0]['term_payment']; ?>" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="supplierRef" class="col-lg-4 control-label">Supplier/Delivery Person Name </label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="supplierRef" class="control-label">Supplier/Delivery Person Name </label>
                                                   <input type="text" class="form-control" name="supplierRef" id="supplierRef" placeholder="Reference" title="Supplier Reference" value="<?php echo $bResult[0]['supplier_ref']; ?>" />
                                              </div>
                                         </div>
@@ -78,6 +86,15 @@ if ($id == '' || !$bResult[0]['bill_id']) {
                document.getElementById('updatePdfForm').submit();
           }
      }
+     $('#invoiceDueDate').datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: 'dd-M-yy',
+          minDate: "Today",
+          yearRange: <?php echo (date('Y') - 100); ?> + ":" + "<?php echo (date('Y')) ?>"
+     }).click(function() {
+          $('.ui-datepicker-calendar').show();
+     });
 </script>
 <?php
 include('../footer.php');

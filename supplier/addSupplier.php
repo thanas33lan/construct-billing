@@ -29,44 +29,62 @@ include('../header.php');
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="supplierName" class="col-lg-4 control-label">Supplier Name <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="supplierName" class="control-label">Supplier Name <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired" id="supplierName" name="supplierName" placeholder="Supplier Name" title="Please enter supplier name" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="phoneNo" class="col-lg-4 control-label">Phone Number <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="gstin" class="control-label required">GSTIN</label>
+                                                  <input type="text" class="form-control" id="gstin" name="gstin" placeholder="Enter GSTIN number" title="Please enter GSTIN number" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <div class="col-lg-12">
+                                                  <label for="phoneNo" class="control-label">Phone Number <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control checkNum isRequired" id="phoneNo" name="phoneNo" placeholder="Phone Number" title="Please enter phone number" />
                                              </div>
                                         </div>
                                    </div>
-                              </div>
 
-                              <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="phoneNo" class="col-lg-4 control-label">Alter Phone Number </label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="phoneNo" class="control-label">Alter Phone Number </label>
                                                   <input type="text" class="form-control checkNum " id="alterPhoneNo" name="alterPhoneNo" placeholder="Phone Number" title="Please enter phone number" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="supplierName" class="col-lg-4 control-label">Address <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
-                                                  <textarea class="form-control isRequired" id="supplierAddress" name="supplierAddress" placeholder="Address" title="Please enter supplier address"></textarea>
+                                             <div class="col-lg-12">
+                                                  <label for="emailId" class="control-label">Email </label>
+                                                  <input type="text" class="form-control isEmail" id="emailId" name="emailId" placeholder="Email Id" title="Please enter email id" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="emailId" class="col-lg-4 control-label">Email </label>
-                                             <div class="col-lg-7">
-                                                  <input type="text" class="form-control isEmail" id="emailId" name="emailId" placeholder="Email Id" title="Please enter email id" />
+                                             <div class="col-lg-12">
+                                                  <label for="status" class="control-label">Status <span class="mandatory">*</span></label>
+                                                  <select class="form-control isRequired" name='status' id='status' title="Please select the status">
+                                                       <option value=""> -- Select -- </option>
+                                                       <option value="active">Active</option>
+                                                       <option value="inactive">Inactive</option>
+                                                  </select>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <div class="col-lg-12">
+                                                  <label for="supplierName" class="control-label">Address <span class="mandatory">*</span></label>
+                                                  <textarea class="form-control isRequired" id="supplierAddress" name="supplierAddress" placeholder="Address" title="Please enter supplier address"></textarea>
                                              </div>
                                         </div>
                                    </div>

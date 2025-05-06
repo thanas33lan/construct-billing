@@ -24,51 +24,58 @@ include('../header.php');
                <!-- /.box-header -->
                <div class="box-body">
                     <!-- form start -->
-                    <form class="form-horizontal" method='post'  name='userForm' id='userForm' autocomplete="off" action="addUserHelper.php">
+                    <form class="form-horizontal" method='post' name='userForm' id='userForm' autocomplete="off" action="addUserHelper.php">
                          <div class="box-body">
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="userName" class="col-lg-4 control-label">User Name <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="userName" class="control-label">User Name <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired" id="userName" name="userName" placeholder="User Name" title="Please enter user name" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="phoneNo" class="col-lg-4 control-label">Phone Number </label>
-                                             <div class="col-lg-7">
-                                                  <input type="text" class="form-control checkNum" id="phoneNo" name="phoneNo" placeholder="Phone Number" title="Please enter phone number"/>
-                                             </div>
-                                        </div>
-                                   </div>
-                              </div>
-                             
-                              <div class="row">
-                                   <div class="col-md-6">
-                                        <div class="form-group">
-                                             <label for="loginId" class="col-lg-4 control-label">Login Id <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
-                                                  <input type="text" class="form-control isRequired" id="loginId" name="loginId" placeholder="Login Id" title="Please enter login id" onblur="checkNameValidation('user_details','login_id',this,null,'This login id that you entered already exists.Try another login id',null)"/>
+                                             <div class="col-lg-12">
+                                                  <label for="phoneNo" class="control-label">Phone Number </label>
+                                                  <input type="text" class="form-control checkNum" id="phoneNo" name="phoneNo" placeholder="Phone Number" title="Please enter phone number" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="password" class="col-lg-4 control-label">Password <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
-                                                  <input type="password" class="form-control ppwd isRequired" id="confirmPassword" name="password" placeholder="Password" title="Please enter the password"/>
+                                             <div class="col-lg-12">
+                                                  <label for="loginId" class="control-label">Login Id <span class="mandatory">*</span></label>
+                                                  <input type="text" class="form-control isRequired" id="loginId" name="loginId" placeholder="Login Id" title="Please enter login id" onblur="checkNameValidation('user_details','login_id',this,null,'This login id that you entered already exists.Try another login id',null)" />
                                              </div>
                                         </div>
                                    </div>
-                              </div>
-                              <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="confirmPassword" class="col-lg-4 control-label">Confirm Password <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="password" class="control-label">Password <span class="mandatory">*</span></label>
+                                                  <input type="password" class="form-control ppwd isRequired" id="confirmPassword" name="password" placeholder="Password" title="Please enter the password" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <div class="col-lg-12">
+                                                  <label for="confirmPassword" class="control-label">Confirm Password <span class="mandatory">*</span></label>
                                                   <input type="password" class="form-control cpwd isRequired confirmPassword" id="confirmPassword" name="password" placeholder="Confirm Password" title="Please make sure passwrod and confirm password same" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                             <div class="col-lg-12">
+                                                  <label for="status" class="control-label">Status <span class="mandatory">*</span></label>
+                                                  <select class="form-control isRequired" name='status' id='status' title="Please select the status">
+                                                       <option value=""> -- Select -- </option>
+                                                       <option value="active">Active</option>
+                                                       <option value="inactive">Inactive</option>
+                                                  </select>
                                              </div>
                                         </div>
                                    </div>
@@ -91,29 +98,34 @@ include('../header.php');
      <!-- /.content -->
 </div>
 <script type="text/javascript">
-function validateNow(){
-     flag = deforayValidator.init({
-          formId: 'userForm'
-     });
-     if(flag){
-        $.blockUI();
-        document.getElementById('userForm').submit();
-     }
-}
-
-function checkNameValidation(tableName,fieldName,obj,fnct,alrt,callback){
-     var removeDots=obj.value.replace(/\,/g,"");
-     //str=obj.value;
-     removeDots = removeDots.replace(/\s{2,}/g,' ');
-     $.post("../includes/checkDuplicate.php", { tableName: tableName,fieldName : fieldName ,value : removeDots.trim(),fnct : fnct, format: "html"},
-     function(data){
-          if(data==='1'){
-               alert(alrt);
-               document.getElementById(obj.id).value="";
+     function validateNow() {
+          flag = deforayValidator.init({
+               formId: 'userForm'
+          });
+          if (flag) {
+               $.blockUI();
+               document.getElementById('userForm').submit();
           }
-     });
-}
+     }
 
+     function checkNameValidation(tableName, fieldName, obj, fnct, alrt, callback) {
+          var removeDots = obj.value.replace(/\,/g, "");
+          //str=obj.value;
+          removeDots = removeDots.replace(/\s{2,}/g, ' ');
+          $.post("../includes/checkDuplicate.php", {
+                    tableName: tableName,
+                    fieldName: fieldName,
+                    value: removeDots.trim(),
+                    fnct: fnct,
+                    format: "html"
+               },
+               function(data) {
+                    if (data === '1') {
+                         alert(alrt);
+                         document.getElementById(obj.id).value = "";
+                    }
+               });
+     }
 </script>
 <?php
 include('../footer.php');

@@ -63,8 +63,8 @@ foreach ($aResult as $supplier) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="supplierName" class="col-lg-4 control-label">Supplier Name <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="supplierName" class="control-label">Supplier Name <span class="mandatory">*</span></label>
                                         <select class="form-control isRequired" id="supplierName" name="supplierName">
                                             <option value="">-- Select --</option>
                                             <?php echo $suplierDetail; ?>
@@ -74,24 +74,24 @@ foreach ($aResult as $supplier) {
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="purchaseDate" class="col-lg-4 control-label">Purchase Date <span class="mandatory">*</span> </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="purchaseDate" class="control-label">Purchase Date <span class="mandatory">*</span> </label>
                                         <input type="text" class="form-control isRequired" id="purchaseDate" name="purchaseDate" placeholder="Purchase Date" title="Please choose date" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceNo" class="col-lg-4 control-label">Invoice Number <span class="mandatory">*</span> </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="invoiceNo" class="control-label">Invoice Number <span class="mandatory">*</span> </label>
                                         <input value="<?php echo $purNo; ?>" type="text" class="form-control isRequired" id="invoiceNo" name="invoiceNo" placeholder="Invoice Number" title="Please enter invoice number" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="purchaseNo" class="col-lg-4 control-label">Purchase Number <span class="mandatory">*</span> </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="purchaseNo" class="control-label">Purchase Number <span class="mandatory">*</span> </label>
                                         <input value="<?php echo $purNo; ?>" type="text" class="form-control isRequired" id="purchaseNo" name="purchaseNo" placeholder="Purchase Number" title="Please enter purchase number" />
                                     </div>
                                 </div>

@@ -67,16 +67,16 @@ foreach ($pResult as $prd) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="quotationsNo" class="col-lg-4 control-label">Quotations Code <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="quotationsNo" class="control-label">Quotations Code <span class="mandatory">*</span></label>
                                         <input type="text" class="form-control isRequired" id="quotationsNo" name="quotationsNo" readonly value="<?php echo $qtnNo; ?>" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="enquiryDate" class="col-lg-4 control-label">Enquiry Date</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="enquiryDate" class="control-label">Enquiry Date</label>
                                         <input type="text" class="form-control" id="enquiryDate" name="enquiryDate" placeholder="Enquiry date" title="Please choose enquiry date" readonly />
                                     </div>
                                 </div>
@@ -85,16 +85,16 @@ foreach ($pResult as $prd) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="quotationsDate" class="col-lg-4 control-label">Quotations Date </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="quotationsDate" class="control-label">Quotations Date </label>
                                         <input type="text" class="form-control" id="quotationsDate" name="quotationsDate" placeholder="Quotations date" title="Please choose date" value="<?php echo date('d-M-Y'); ?>" readonly />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientName" class="col-lg-4 control-label">Client Name </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="clientName" class="control-label">Client Name </label>
                                         <select class="form-control isRequired" id="clientName" name="clientName" title="Please choose client name">
                                         </select>
                                     </div>
@@ -104,8 +104,8 @@ foreach ($pResult as $prd) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientAddress" class="col-lg-4 control-label">Address <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="clientAddress" class="control-label">Address <span class="mandatory">*</span></label>
                                         <textarea type="text" class="form-control isRequired" id="clientAddress" name="clientAddress" placeholder="Address" title="Please enter address"></textarea>
                                     </div>
                                 </div>
@@ -245,6 +245,7 @@ foreach ($pResult as $prd) {
                 return markup;
             }
         });
+
         $("#clientName").on("change", function(e) {
             clientName = $('#clientName').select2('data');
             if ($(this).val() != "" && $(this).val() != null) {

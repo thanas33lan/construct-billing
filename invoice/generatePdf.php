@@ -116,7 +116,8 @@ $html .= '<address><b>' . ucwords($cliResult['client_name']) . '</b><br/>';
 $html .= ucwords($bResult['shipping_address']) . '</address>';
 if (isset($cliResult['client_mobile_no']) && !empty($cliResult['client_mobile_no']))
 	$html .= '<br><span>Mobile: ' . $cliResult['client_mobile_no'] . '</span><br/>';
-$html .= '<br><span><strong>GSTIN: ' . $cliResult['gst_no'] . '</strong></span><br/>';
+if (isset($cliResult['gst_no']) && !empty($cliResult['gst_no']))
+	$html .= '<br><span><strong>GSTIN: ' . $cliResult['gst_no'] . '</strong></span><br/>';
 if (isset($cliResult['client_email_id']) && !empty($cliResult['client_email_id']))
 	$html .= '<span>E-Mail: ' . $cliResult['client_email_id'] . '</span>';
 $html .= '</td>';

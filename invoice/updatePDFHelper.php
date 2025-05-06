@@ -11,6 +11,7 @@ try {
     $data = array(
         'term_payment' => $_POST['termPayment'],
         'supplier_ref' => $_POST['supplierRef'],
+        'invoice_due_date' => $general->dateFormat($_POST['invoiceDueDate'])
     );
 
     $billId = $_POST['billId'];

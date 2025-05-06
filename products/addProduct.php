@@ -48,16 +48,16 @@ foreach ($aResult as $supplier) {
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="productName" class="col-lg-4 control-label">Product Name <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="productName" class="control-label">Product Name <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired" id="productName" name="productName" placeholder="Product Name" title="Please enter product name" onblur="checkNameValidation('product_details','product_name',this,null,'This product name that you entered already exists.Try another name')" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="prdDesc" class="col-lg-4 control-label">Description</label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="prdDesc" class="control-label">Description</label>
                                                   <textarea type="text" class="form-control" id="prdDesc" name="prdDesc" placeholder="Please enter the description" title="Please enter description"></textarea>
                                              </div>
                                         </div>
@@ -67,16 +67,16 @@ foreach ($aResult as $supplier) {
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="hsnCode" class="col-lg-4 control-label">HSN Code <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
-                                                  <input type="text" value="<?php echo $hsnNo; ?>" class="form-control isRequired" id="hsnCode" name="hsnCode" placeholder="HSN Code" title="Please enter HSN code" onblur="checkNameValidation('product_details','hsn_code',this,null,'This hsn code that you entered already exists.Try another hsn code')" />
+                                             <div class="col-lg-12">
+                                                  <label for="hsnCode" class="control-label">HSN Code <span class="mandatory">*</span></label>
+                                                  <input type="text" value="<?php echo $hsnNo; ?>" class="form-control isRequired" id="hsnCode" name="hsnCode" placeholder="HSN Code" title="Please enter HSN code" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="tax" class="col-lg-4 control-label">Tax(%) <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="tax" class="control-label">Tax(%) <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired  checkNum" id="tax" name="tax" placeholder="Tax" title="Please enter tax" />
                                              </div>
                                         </div>
@@ -85,8 +85,8 @@ foreach ($aResult as $supplier) {
                               <div class="row">
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="supplier" class="col-lg-4 control-label">Select Supplier <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="supplier" class="control-label">Select Supplier <span class="mandatory">*</span></label>
                                                   <select name="supplier" id="supplier" class="form-control isRequired" title="Choose supplier">
                                                        <option value="">-- Select --</option>
                                                        <?php echo $supplierDetail; ?>
@@ -96,9 +96,10 @@ foreach ($aResult as $supplier) {
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="productPrice" class="col-lg-4 control-label">Product Price <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="productPrice" class="control-label">Product Price <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired checkNum" id="productPrice" name="productPrice" placeholder="Product Price" title="Please enter product price" />
+                                                  <code>Including GST</code>
                                              </div>
                                         </div>
                                    </div>
@@ -108,16 +109,16 @@ foreach ($aResult as $supplier) {
                                    <h4 style="margin-left:20px;padding:0px;margin-top:2px;">Stock Details</h4>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="productPrice" class="col-lg-4 control-label">Product Quantity <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="productPrice" class="control-label">Product Quantity <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired checkNum" id="actualQty" value="<?php echo $productInfo[0]['qty_available']; ?>" name="actualQty" placeholder="Product Actual Qty" title="Please enter product actual quantity" />
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                             <label for="productPrice" class="col-lg-4 control-label">Minimum Quantity <span class="mandatory">*</span></label>
-                                             <div class="col-lg-7">
+                                             <div class="col-lg-12">
+                                                  <label for="productPrice" class="control-label">Minimum Quantity <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control isRequired checkNum" id="minimumQty" value="<?php echo $productInfo[0]['minimum_qty']; ?>" name="minimumQty" placeholder="Product Minimum Qty" title="Please enter product minimum quantity" />
                                                   <code>Set minimum available Quantity</code>
                                              </div>
@@ -125,7 +126,8 @@ foreach ($aResult as $supplier) {
                                    </div>
                               </div>
                          </div>
-                         <hr><h2>Options</h2>
+                         <hr>
+                         <h2>Options</h2>
                          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
                               <thead>
                                    <tr>
@@ -137,8 +139,8 @@ foreach ($aResult as $supplier) {
                               </thead>
                               <tbody id="optionTable">
                                    <tr>
-                                        <td><input type="text" class="form-control" id="name1" name="name[]" placeholder="Option name" title="Please enter the option name"/></td>
-                                        <td><input type="text" name="value[]" id="value1" class="form-control" placeholder="Option value" title="Please enter the option value"/></td>
+                                        <td><input type="text" class="form-control" id="name1" name="name[]" placeholder="Option name" title="Please enter the option name" /></td>
+                                        <td><input type="text" name="value[]" id="value1" class="form-control" placeholder="Option value" title="Please enter the option value" /></td>
                                         <td>
                                              <select name="status[]" id="status1" class="form-control" title="Choose status">
                                                   <option value="active">Active</option>
@@ -168,6 +170,7 @@ foreach ($aResult as $supplier) {
 </div>
 <script type="text/javascript">
      var optionTableRowId = 2;
+
      function validateNow() {
           flag = deforayValidator.init({
                formId: 'productForm'
@@ -224,6 +227,39 @@ foreach ($aResult as $supplier) {
                }
           });
      }
+     $(document).ready(function() {
+          $("#supplier").select2({
+               placeholder: "Enter supplier name",
+               minimumInputLength: 0,
+               width: '100%',
+               allowClear: true,
+               ajax: {
+                    placeholder: "Type supplier name to search",
+                    url: "get-supplier-list.php",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                         return {
+                              q: params.term, // search term
+                              page: params.page
+                         };
+                    },
+                    processResults: function(data, params) {
+                         params.page = params.page || 1;
+                         return {
+                              results: data.result,
+                              pagination: {
+                                   more: (params.page * 30) < data.total_count
+                              }
+                         };
+                    },
+                    //cache: true
+               },
+               escapeMarkup: function(markup) {
+                    return markup;
+               }
+          });
+     });
 </script>
 <?php
 include('../footer.php');

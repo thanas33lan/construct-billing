@@ -33,7 +33,7 @@ try {
         $data = array(
             'invoice_no' => $_POST['invoiceNo'],
             'invoice_date' => $general->dateFormat($_POST['invoiceDate']),
-            'invoice_due_date' => ($_POST['invoiceDueDate'] != '') ? $general->dateFormat($_POST['invoiceDueDate']) : NULL,
+            'invoice_due_date' => $general->dateFormat($_POST['invoiceDueDate']),
             'client_name' => $_POST['clientName'],
             'billing_address' => $_POST['address'],
             'shipping_address' => $_POST['shipAddress'],
@@ -86,8 +86,7 @@ try {
                 $billDetails = array(
                     'bill_id' => $lastId,
                     'product_name' => $_POST['prdName'][$k],
-                    'hsn_code' => $_POST['hsnCode'][$k],
-                    'sqft' => $_POST['sqft'][$k],
+                    'hsn_code' => $_POST['hsnCode'][$k] ?? null,
                     'sold_qty' => $_POST['prdQty'][$k],
                     'rate' => $_POST['prdPrice'][$k],
                     'tax' => $_POST['tax'][$k],

@@ -76,26 +76,32 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceNo" class="col-lg-4 control-label">Invoice Number <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="invoiceNo" class="control-label">Invoice Number <span class="mandatory">*</span></label>
                                         <input type="text" class="form-control isRequired" id="invoiceNo" name="invoiceNo" readonly value="<?php echo $invoiceNo; ?>" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceDate" class="col-lg-4 control-label">Invoice Date </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="invoiceDate" class="control-label">Invoice Date </label>
                                         <input type="text" class="form-control" id="invoiceDate" name="invoiceDate" placeholder="Invoice Date" title="Please choose date" readonly value="<?php echo date('d-M-Y'); ?>" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientName" class="col-lg-4 control-label">Client Name </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="invoiceDueDate" class="control-label">Invoice Due Date </label>
+                                        <input type="text" class="form-control" id="invoiceDueDate" name="invoiceDueDate" placeholder="Invoice due date" title="Please choose due date" readonly value="<?php echo date('d-M-Y'); ?>" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="clientName" class="control-label">Client Name </label>
                                         <select class="form-control isRequired" id="clientName" name="clientName">
                                         </select>
                                     </div>
@@ -103,46 +109,41 @@ foreach ($aResult as $agent) {
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="clientMobile" class="col-lg-4 control-label">Client Mobile</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="clientMobile" class="control-label">Client Mobile</label>
                                         <input type="text" class="form-control" name="clientMobile" id="clientMobile" placeholder="Client Mobile" title="Client mobile number" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="phoneNo" class="col-lg-4 control-label">Billing Address <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
-                                        <textarea type="text" class="form-control isRequired" id="address" name="address" placeholder="Address" title="Please enter address"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="clientName" class="col-lg-4 control-label">Shipping Address <span class="mandatory">*</span></label>
-                                    <div class="col-lg-7">
-                                        <textarea type="text" class="form-control isRequired" id="shipAddress" name="shipAddress" placeholder="Shipping Address" title="Please enter shipping address"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="termPayment" class="col-lg-4 control-label">Mode/Terms of Payment </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="termPayment" class="control-label">Mode/Terms of Payment </label>
                                         <input type="text" class="form-control" name="termPayment" id="termPayment" placeholder="Terms of Payment" title="Terms of Payment" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="supplierRef" class="col-lg-4 control-label">Supplier/Delivery Person Name </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="supplierRef" class="control-label">Supplier/Delivery Person Name </label>
                                         <input type="text" class="form-control" name="supplierRef" id="supplierRef" placeholder="Reference" title="Supplier Reference" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="phoneNo" class="control-label">Billing Address <span class="mandatory">*</span></label>
+                                        <textarea type="text" class="form-control isRequired" id="address" name="address" placeholder="Address" title="Please enter address"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="clientName" class="control-label">Shipping Address <span class="mandatory">*</span></label>
+                                        <textarea type="text" class="form-control isRequired" id="shipAddress" name="shipAddress" placeholder="Shipping Address" title="Please enter shipping address"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -565,14 +566,16 @@ foreach ($aResult as $agent) {
             var pId = $("#prdName" + rowId).find(':selected').attr('data-id');
             var price = $("#prdName" + rowId).find(':selected').attr('data-price');
             var desc = $("#prdName" + rowId).find(':selected').attr('data-description');
-            $("#tax" + rowId).val($("#prdName" + rowId).find(':selected').attr('data-gst'));
-            $("#taxablePrice" + rowId).val($("#prdName" + rowId).find(':selected').attr('data-price'));
+            let tax = $("#prdName" + rowId).find(':selected').attr('data-gst');
+            let basePrice = price / (1 + tax / 100);
 
+            $("#tax" + rowId).val(tax);
+            $("#taxablePrice" + rowId).val($("#prdName" + rowId).find(':selected').attr('data-price'));
             $("#prdQty" + rowId).val(1);
             $("#productId" + rowId).val(pId);
             $("#hsnCode" + rowId).html(hsn);
-            $("#prdPrice" + rowId).val(price);
-            $("#lineTotal" + rowId).val(price);
+            $("#prdPrice" + rowId).val(basePrice);
+            $("#lineTotal" + rowId).val(basePrice);
             $("#prdDesc" + rowId).html(desc);
 
             taxCalculation(rowId);
