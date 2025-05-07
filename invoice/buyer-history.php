@@ -36,7 +36,7 @@ $cResult = $db->rawQuery($cQuery);
 										<?php
 										foreach ($cResult as $name) {
 										?>
-											<option value="<?php echo $name['client_name']; ?>"><?php echo $name['client_name']; ?></option>
+											<option value="<?php echo $name['client_id']; ?>"><?php echo $name['client_name']; ?></option>
 										<?php
 										}
 										?>

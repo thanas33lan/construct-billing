@@ -16,8 +16,9 @@ try {
 
         //check already have this client
         $cQuery = "SELECT * FROM client_details where client_status='active' and client_name='" . $_POST['clientName'] . "'";
-        $cResult = $db->rawQuery($cQuery);
-        if (isset($cResult[0]['client_name']) && $cResult[0]['client_name'] != '') {
+        $cResult = $db->rawQueryOne($cQuery);
+        if (isset($cResult['client_name']) && $cResult['client_name'] != '') {
+            $clientId = $cResult['client_id'];
         } else {
             $clientData = array(
                 'client_name' => $_POST['clientName'],
@@ -28,12 +29,13 @@ try {
                 'client_added_by' => $_SESSION['userId'],
                 'client_added_on' => $general->getDateTime()
             );
-            $db->insert($clientTable, $clientData);
+            $clientId = $db->insert($clientTable, $clientData);
         }
         $data = array(
             'invoice_no' => $_POST['invoiceNo'],
             'invoice_date' => $general->dateFormat($_POST['invoiceDate']),
             'invoice_due_date' => $general->dateFormat($_POST['invoiceDueDate']),
+            'client_id' => $clientId,
             'client_name' => $_POST['clientName'],
             'billing_address' => $_POST['address'],
             'shipping_address' => $_POST['shipAddress'],
@@ -111,6 +113,7 @@ try {
             for ($l = 0; $l < $p; $l++) {
                 $paidDetails = array(
                     'bill_id' => $lastId,
+                    'client_id' => $clientId,
                     'pay_option' => $_POST['payOption'][$l],
                     'paid_amount' => $_POST['payAmt'][$l],
                     'pay_details' => $_POST['payDetails'][$l],
