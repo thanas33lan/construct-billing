@@ -711,46 +711,102 @@ foreach ($aResult as $agent) {
         var sqft = document.getElementsByName("sqft[]");
         var unitTotal = document.getElementsByName("lineTotal[]");
         var discount = document.getElementsByName("discount[]");
+        var tax = document.getElementsByName("tax[]");
+        var cgstTax = document.getElementsByName("cgstTax[]");
+        var sgstTax = document.getElementsByName("sgstTax[]");
+        var igstTax = document.getElementsByName("igstTax[]");
         var cgstAmt = document.getElementsByName("cgstAmt[]");
+        var sgstAmt = document.getElementsByName("sgstAmt[]");
         var igstAmt = document.getElementsByName("igstAmt[]");
+        var taxablePrice = document.getElementsByName("taxablePrice[]");
+
         for (i = 0; i < unitPrice.length; i++) {
             if (unitPrice[i].value != "" && (qty[i].value != "" || sqft[i].value != "")) {
+                // Validate quantity or sqft isn't zero
                 if ($('#sqftCheck' + (i + 1)).prop("checked") == true) {
                     if (sqft[i].value == 0) {
                         alert("Sorry! You can not add ZERO square feet.")
                         sqft[i].value = 1;
                     }
+                    var quantity = parseFloat(sqft[i].value);
                 } else {
-
                     if (qty[i].value == 0) {
                         alert("Sorry! You can not add ZERO quantity.")
                         qty[i].value = 1;
                     }
+                    var quantity = parseFloat(qty[i].value);
                 }
-                if ($('#sqftCheck' + (i + 1)).prop("checked") == true) {
-                    unitQty = parseFloat(unitPrice[i].value) * parseFloat(sqft[i].value);
-                } else {
-                    unitQty = parseFloat(unitPrice[i].value) * parseFloat(qty[i].value);
-                }
-                cgstTotal += (cgstAmt[i].value != '' && cgstAmt[i].value != 0) ? parseFloat(cgstAmt[i].value) : parseFloat(0);
-                igstTotal += (igstAmt[i].value != '' && igstAmt[i].value != 0) ? parseFloat(igstAmt[i].value) : parseFloat(0);
-                lineTotal = ((cgstAmt[i].value != '' && cgstAmt[i].value != 0) ? parseFloat(cgstAmt[i].value * 2) : parseFloat(0)) + ((igstAmt[i].value != '' && igstAmt[i].value != 0) ? parseFloat(igstAmt[i].value) : parseFloat(0)) + parseFloat(unitQty);
-                unitTotal[i].value = parseFloat(lineTotal).toFixed(2);
+
+                // Get base price and calculate base amount
+                var basePrice = parseFloat(unitPrice[i].value);
+                var baseAmount = basePrice * quantity;
+
+                // Apply discount if provided (on base amount before tax)
+                var discountAmount = 0;
                 if (discount[i].value != "") {
-                    unitTotal[i].value = (unitTotal[i].value - ((unitTotal[i].value / 100) * discount[i].value));
+                    var discountRate = parseFloat(discount[i].value);
+                    discountAmount = (baseAmount * discountRate) / 100;
                 }
-                grandTotal += parseFloat(unitTotal[i].value);
-                taxableGt += unitQty;
-            } else {
-                grandTotal += 0;
+
+                // Calculate taxable amount after discount
+                var taxableAmount = baseAmount - discountAmount;
+                taxablePrice[i].value = taxableAmount.toFixed(2);
+
+                // Calculate tax amounts based on taxable amount
+                var taxRate = parseFloat(tax[i].value || 0);
+                var taxAmount = 0;
+
+                // Check if CGST/SGST or IGST is applicable
+                if (cgstTax[i].value != '' && cgstTax[i].value != '0') {
+                    // Split GST scenario (CGST + SGST)
+                    var halfTaxRate = taxRate / 2;
+                    var halfTaxAmount = (taxableAmount * halfTaxRate) / 100;
+
+                    cgstTax[i].value = halfTaxRate.toFixed(2);
+                    sgstTax[i].value = halfTaxRate.toFixed(2);
+                    cgstAmt[i].value = halfTaxAmount.toFixed(2);
+                    sgstAmt[i].value = halfTaxAmount.toFixed(2);
+
+                    // Clear IGST fields
+                    igstTax[i].value = '';
+                    igstAmt[i].value = '';
+
+                    taxAmount = halfTaxAmount * 2;
+                } else if (igstTax[i].value != '' && igstTax[i].value != '0') {
+                    // IGST scenario
+                    var igstAmount = (taxableAmount * taxRate) / 100;
+
+                    igstTax[i].value = taxRate.toFixed(2);
+                    igstAmt[i].value = igstAmount.toFixed(2);
+
+                    // Clear CGST/SGST fields
+                    cgstTax[i].value = '';
+                    sgstTax[i].value = '';
+                    cgstAmt[i].value = '';
+                    sgstAmt[i].value = '';
+
+                    taxAmount = igstAmount;
+                }
+
+                // Calculate line total (taxable amount + tax amount)
+                var lineTotal = taxableAmount + taxAmount;
+                unitTotal[i].value = lineTotal.toFixed(2);
+
+                // Add to totals
+                grandTotal += lineTotal;
+                taxableGt += taxableAmount;
+                cgstTotal += parseFloat(cgstAmt[i].value || 0);
+                igstTotal += parseFloat(igstAmt[i].value || 0);
             }
         }
+
+        // Update totals
         var roundGrandTotal = Math.round(grandTotal);
         document.getElementById('grandTotal').value = roundGrandTotal.toFixed(2);
         document.getElementById('taxableGrandTotal').value = Math.round(taxableGt).toFixed(2);
-        document.getElementById('cgstTaxTotal').value = cgstTotal.toFixed(1);
-        document.getElementById('sgstTaxTotal').value = cgstTotal.toFixed(1);
-        document.getElementById('igstTaxTotal').value = igstTotal.toFixed(1);
+        document.getElementById('cgstTaxTotal').value = cgstTotal.toFixed(2);
+        document.getElementById('sgstTaxTotal').value = cgstTotal.toFixed(2);
+        document.getElementById('igstTaxTotal').value = igstTotal.toFixed(2);
     }
 
     function checkExistProduct(rowId) {

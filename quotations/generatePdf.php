@@ -97,9 +97,8 @@ $html .= '
                     </address></td>
                     <td><address>
                         To<br>
-                        <b>Mr/Mrs/Ms.' . ucwords($cliResult['client_name']) . ',</b><br>
+                        <b>' . ucwords($cliResult['client_name']) . ',</b><br>
                         ' . $cliResult['client_address'] . ',<br>
-                        Tamilnadu.
                     </address></td>
                 </tr>
                 <tr><td colspan="2"><span>
@@ -154,6 +153,14 @@ if ($n <= 5) {
 					' . str_repeat('<br/>', (int)($n * (6 - $n))) . '
 				</td>
 			</tr>';
+}
+if (isset($bResult['additional_charges']) && !empty($bResult['additional_charges'])) {
+    $html .= '<tr>';
+    if (isset($bResult['additional_charges_reason']) && !empty($bResult['additional_charges_reason']))
+        $html .= '<td colspan="5" align="right">' . $bResult['additional_charges_reason'] . '</td>';
+    $html .= '<td align="left"><b>' . number_format($bResult['additional_charges'], 2) . '</b></td>
+            </tr>';
+    $bResult['grand_total'] += $bResult['additional_charges'];
 }
 $html .= '
                                 <tr>

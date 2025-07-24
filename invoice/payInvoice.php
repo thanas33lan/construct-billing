@@ -7,7 +7,7 @@ $bQuery = "SELECT * FROM bill_details where bill_id='" . base64_decode($_GET['id
 $bResult = $db->rawQueryOne($bQuery);
 
 //get pay details
-$pQuery = "SELECT * FROM paid_details where client_id='" . $bResult['client_id'] . "' ORDER BY paid_on ASC";
+$pQuery = "SELECT * FROM paid_details where bill_id=" . base64_decode($_GET['id']) . " ORDER BY paid_on ASC";
 $pResult = $db->rawQuery($pQuery);
 
 //get all agent details
@@ -44,35 +44,17 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceNo" class="col-lg-4 control-label">Invoice Number </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control " id="invoiceNo" name="invoiceNo" readonly value="<?php echo $bResult['invoice_no']; ?>" />
+                                    <div class="col-lg-12">
+                                        <label for="invoiceNo" class="control-label">Invoice Number </label>
+                                        <input type="text" readonly class="form-control " id="invoiceNo" name="invoiceNo" value="<?php echo $bResult['invoice_no']; ?>" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="invoiceDate" class="col-lg-4 control-label">Invoice Date </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="invoiceDate" name="invoiceDate" placeholder="Invoice Date" title="Please choose date" readonly value="<?php echo $general->humanDateFormat($bResult['invoice_date']); ?>" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="invoiceDueDate" class="col-lg-4 control-label">Invoice Due Date </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="invoiceDueDate" name="invoiceDueDate" placeholder="Invoice Due Date" title="Please choose date" value="<?php echo $general->humanDateFormat($bResult['invoice_due_date']); ?>" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="clientName" class="col-lg-4 control-label">Client Name </label>
-                                    <div class="col-lg-7">
-                                        <input type="text" name="clientName" id="clientName" class="form-control" value="<?php echo $bResult['client_name']; ?>" />
+                                    <div class="col-lg-12">
+                                        <label for="invoiceDate" class="control-label">Invoice Date </label>
+                                        <input type="text" readonly class="form-control" id="invoiceDate" name="invoiceDate" placeholder="Invoice Date" title="Please choose date" value="<?php echo $general->humanDateFormat($bResult['invoice_date']); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -80,17 +62,17 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="phoneNo" class="col-lg-4 control-label">Billing Address </label>
-                                    <div class="col-lg-7">
-                                        <textarea type="text" class="form-control " id="address" name="address" placeholder="Address" title="Please enter address"><?php echo $bResult['billing_address']; ?></textarea>
+                                    <div class="col-lg-12">
+                                        <label for="invoiceDueDate" class="control-label">Invoice Due Date </label>
+                                        <input type="text" readonly class="form-control" id="invoiceDueDate" name="invoiceDueDate" placeholder="Invoice Due Date" title="Please choose date" value="<?php echo $general->humanDateFormat($bResult['invoice_due_date']); ?>" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="shipAddress" class="col-lg-4 control-label">Shipping Address </label>
-                                    <div class="col-lg-7">
-                                        <textarea type="text" class="form-control " id="shipAddress" name="shipAddress" placeholder="Shipping Address" title="Please enter shipping address"><?php echo $bResult['shipping_address']; ?></textarea>
+                                    <div class="col-lg-12">
+                                        <label for="clientName" class="control-label">Client Name </label>
+                                        <input type="text" readonly name="clientName" id="clientName" class="form-control" value="<?php echo $bResult['client_name']; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -98,8 +80,26 @@ foreach ($aResult as $agent) {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="phoneNo" class="col-lg-4 control-label">Total Amount </label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-12">
+                                        <label for="phoneNo" class="control-label">Billing Address </label>
+                                        <textarea type="text" readonly class="form-control " id="address" name="address" placeholder="Address" title="Please enter address"><?php echo $bResult['billing_address']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="shipAddress" class="control-label">Shipping Address </label>
+                                        <textarea type="text" readonly class="form-control " id="shipAddress" name="shipAddress" placeholder="Shipping Address" title="Please enter shipping address"><?php echo $bResult['shipping_address']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="phoneNo" class="control-label">Total Amount </label>
                                         <span type="text" class="form-control"><?php echo $bResult['total_amount']; ?></span>
                                         <input type="hidden" name="grandTotal" id="grandTotal" value="<?php echo $bResult['total_amount']; ?>" />
                                     </div>

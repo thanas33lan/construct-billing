@@ -150,6 +150,11 @@ foreach ($pResult as $prd) {
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td colspan="3"><strong style="float:right;">Additonal Charges</strong></td>
+                                <td colspan="2"><input type="text" id="additionalChargesReason" name="additionalChargesReason" class="form-control" placeholder="Additional charges reason" title="Please enter the additional charges reason" /></td>
+                                <td><input type="text" id="additionalCharges" name="additionalCharges" class="form-control checkNum" placeholder="Additional charges" title="Please enter the additional charges" /></td>
+                            </tr>
+                            <tr>
                                 <td colspan="5"><strong style="float:right;">Taxable Total Price</strong></td>
                                 <td><input type="text" id="grandTotal" name="grandTotal" class="form-control checkNum" placeholder="Total" readonly title="Grand Total for this quotations" /></td>
                             </tr>

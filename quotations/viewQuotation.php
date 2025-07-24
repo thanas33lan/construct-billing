@@ -21,7 +21,12 @@ $cQuery = "SELECT * FROM company_profile";
 $cResult = $db->rawQuery($cQuery);
 ?>
 <style>
-    .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
         border-top: 1px solid transparent;
     }
 </style>
@@ -39,7 +44,9 @@ $cResult = $db->rawQuery($cQuery);
                             <h1 style="line-height:1; text-align:center;"><u>Quotation</u></h1>
                         </td>
                     </tr>
-                    <tr class="col-md-6"><td width="68%">#<?php echo $bResult[0]['q_code']; ?></td></tr>
+                    <tr class="col-md-6">
+                        <td width="68%">#<?php echo $bResult[0]['q_code']; ?></td>
+                    </tr>
                     <tr>
                         <td>
                             <table border="0">
@@ -127,6 +134,12 @@ $cResult = $db->rawQuery($cQuery);
                                     <?php } ?>
                                 </tbody>
                                 <tfoot>
+                                    <?php if (isset($bResult['additional_charges']) && !empty($bResult['additional_charges'])) { ?>
+                                        <tr>
+                                            <td colspan="5" align="right"><?php echo $bResult['additional_charges_reason']; ?></td>
+                                            <td align="right"><b>₹ <?php echo number_format($bResult[0]['additional_charges'], 2); ?></b></td>
+                                        </tr>
+                                    <?php } ?>
                                     <tr>
                                         <td colspan="5" align="right"><b>Grand Total</b></td>
                                         <td align="right"><b>₹ <?php echo number_format($bResult[0]['grand_total'], 2); ?></b></td>

@@ -17,7 +17,8 @@ try {
         //check already have this client
         $cQuery = "SELECT * FROM client_details where client_status='active' and client_name='" . $_POST['clientName'] . "'";
         $cResult = $db->rawQuery($cQuery);
-        if (isset($cResult[0]['client_name']) && $cResult[0]['client_name'] != '') { } else {
+        if (isset($cResult[0]['client_name']) && $cResult[0]['client_name'] != '') {
+        } else {
             $clientData = array(
                 'client_name' => $_POST['clientName'],
                 'client_address' => $_POST['clientAddress'],
@@ -29,23 +30,25 @@ try {
             $lastClientId = $db->getInsertId();
         }
         $data = array(
-            'q_customer'    => isset($cResult[0]['client_id'])?$cResult[0]['client_id']:$lastClientId,
+            'q_customer'    => isset($cResult[0]['client_id']) ? $cResult[0]['client_id'] : $lastClientId,
             'q_code'        => $_POST['quotationsNo'],
             'enquiry_date'  => $general->dateFormat($_POST['enquiryDate']),
             'q_date'        => $general->dateFormat($_POST['quotationsDate']),
             'grand_total'   => $_POST['grandTotal'],
+            'additional_charges_reason' => $_POST['additionalChargesReason'],
+            'additional_charges' => $_POST['additionalCharges'],
             'q_added_by'    => $_SESSION['userId'],
             'q_added_on'    => $general->getDateTime(),
         );
 
         $id = $db->insert($quotationTable, $data);
-        
+
         if ($id > 0) {
             $c = count($_POST['prdName']);
             $lastQId = $db->getInsertId();
             for ($k = 0; $k < $c; $k++) {
-                if(!is_numeric($_POST['prdName'][$k])){
-                    $pData=array(
+                if (!is_numeric($_POST['prdName'][$k])) {
+                    $pData = array(
                         'product_name'          => $_POST['prdName'][$k],
                         'product_description'   => $_POST['prdDesc'][$k],
                         'product_price'         => $_POST['prdPrice'][$k],
@@ -54,7 +57,7 @@ try {
                         'product_added_on'      => date('Y-m-d H:i:s'),
                         'product_status'        => 'active'
                     );
-                    $id = $db->insert('product_details',$pData);
+                    $id = $db->insert('product_details', $pData);
                     $lastProductId = $db->getInsertId();
                     $stockData = array(
                         'product_id'    => $lastProductId,
@@ -62,7 +65,7 @@ try {
                         'minimum_qty'   => 10,
                         'stock_status'  => 'active'
                     );
-                    $stockId = $db->insert('stock_details',$stockData);
+                    $stockId = $db->insert('stock_details', $stockData);
                     $_POST['prdName'][$k] = $lastProductId;
                 }
                 $quotationDetails = array(

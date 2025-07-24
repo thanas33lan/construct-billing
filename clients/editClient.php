@@ -89,8 +89,8 @@ if ($id == '' || !$clientInfo[0]['client_id']) {
                                    <div class="col-md-6">
                                         <div class="form-group">
                                              <div class="col-lg-12">
-                                                  <label for="clientEmail" class="control-label">GSTIN <span class="mandatory">*</span></label>
-                                                  <input type="text" class="form-control isRequired" id="gstIn" name="gstIn" placeholder="GSTIN" title="Please enter GSTIN Number" value="<?php echo $clientInfo[0]['gst_no']; ?>" />
+                                                  <label for="clientEmail" class="control-label">GSTIN</label>
+                                                  <input type="text" class="form-control" id="gstIn" name="gstIn" placeholder="GSTIN" title="Please enter GSTIN Number" value="<?php echo $clientInfo[0]['gst_no']; ?>" />
                                              </div>
                                         </div>
                                    </div>

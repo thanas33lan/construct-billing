@@ -6,10 +6,10 @@ include('../includes/tcpdf/tcpdf.php');
 define('UPLOAD_PATH', '../uploads');
 $general = new General();
 
-$customerName = $_GET['customerId'];
+$customerId = isset($_GET['customerId']) ? $_GET['customerId'] : '';
 $bQuery = "SELECT * FROM bill_details where ";
 if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-    $bQuery = $bQuery . "client_name like '%" . $customerName . "%'";
+    $bQuery = $bQuery . "client_id like " . $customerId . "";
 }
 $bResult = $db->rawQuery($bQuery);
 
@@ -22,7 +22,7 @@ $cResult = $db->rawQuery($cQuery);
 //get all pending payment
 $pQuery = "SELECT SUM(paid_amount) AS paid_amount,SUM(total_amount) as total_amount FROM bill_details where ";
 if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-    $pQuery = $pQuery . "client_name like '%" . $customerName . "%'";
+    $pQuery = $pQuery . "client_id like " . $customerId . "";
 }
 $start_date = '';
 $end_date = '';
@@ -39,13 +39,13 @@ if (isset($_GET['invoiceDate']) && trim($_GET['invoiceDate']) != '') {
 }
 
 // die($pQuery);
-$paidResult = $db->query($pQuery);
+$paidResult = $db->rawQueryOne($pQuery);
 
-$totalPendingAmount = $paidResult[0]['total_amount'] - $paidResult[0]['paid_amount'];
+$totalPendingAmount = $paidResult['total_amount'] - $paidResult['paid_amount'];
 //get all paid history
 $dQuery = "SELECT DISTINCT DATE(invoice_date) as invoice_date FROM bill_details where ";
 if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-    $dQuery = $dQuery . "client_name like '%" . $customerName . "%'";
+    $dQuery = $dQuery . "client_id like " . $customerId . "";
 }
 $start_date = '';
 $end_date = '';
@@ -64,10 +64,21 @@ if (isset($_GET['invoiceDate']) && trim($_GET['invoiceDate']) != '') {
 
 $dResult = $db->query($dQuery);
 
-
-$pdQuery = "SELECT DISTINCT DATE(paid_on) as paid_on,paid_id FROM paid_details as pd JOIN bill_details as b ON b.bill_id=pd.bill_id  where ";
+$pdQuery = "
+SELECT DISTINCT 
+    DATE(paid_on) as paid_on, 
+    paid_id, 
+    invoice_date, 
+    (b.total_amount) AS total_amount, 
+    (pd.paid_amount) AS paid_amount
+FROM 
+    paid_details AS pd 
+LEFT JOIN 
+    bill_details AS b 
+ON 
+    b.bill_id = pd.bill_id ";
 if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-    $pdQuery = $pdQuery . "client_name like '%" . $customerName . "%'";
+    $where[] = " pd.client_id like " . $customerId . "";
 }
 $start_date = '';
 $end_date = '';
@@ -79,10 +90,12 @@ if (isset($_GET['invoiceDate']) && trim($_GET['invoiceDate']) != '') {
     if (isset($s_c_date[1]) && trim($s_c_date[1]) != "") {
         $end_date = $general->dateFormat(trim($s_c_date[1]));
     }
-    $pdQuery = $pdQuery . 'AND DATE(paid_on) >= "' . $start_date . '" AND DATE(paid_on) <= "' . $end_date . '" order by paid_on';
+    $where[] = ' DATE(paid_on) >= "' . $start_date . '" AND DATE(paid_on) <= "' . $end_date . '" order by paid_on';
 }
+if (isset($where) && !empty($where))
+    $pdQuery .= "WHERE " . implode(" AND ", $where);
 
-
+// die($pdQuery);
 $pdResult = $db->query($pdQuery);
 
 $invoiceDate = array_column($dResult, 'invoice_date');
@@ -97,10 +110,16 @@ function date_sort($a, $b)
     return strtotime($a) - strtotime($b);
 }
 usort($orderByDate, "date_sort");
-
+/* echo "<pre>";
+print_r($orderByDate);
+die; */
 $customerName = $_GET['customerId'];
 $invoiceDate = $_GET['invoiceDate'];
-
+$totalAmount = $paidAmount = $openingBalance =  0;
+foreach ($pdResult as $row) {
+    if (!$openingBalance && empty($row['invoice_date']))
+        $openingBalance = $row['paid_amount'];
+}
 class MYPDF extends TCPDF
 {
     private $customerName = "";
@@ -187,7 +206,6 @@ $scdate = '';
 if ((isset($s_c_date) && count($s_c_date) > 0)) {
     $scdate = $s_c_date[0];
 }
-// $html .= '<b>' . $invoiceDate . '</b>';
 $html .= '<br/><table border="1" style="padding:3px;">
             <thead>
                 <tr>
@@ -201,66 +219,99 @@ $html .= '<br/><table border="1" style="padding:3px;">
             </thead>';
 $html .= '<tbody>';
 $html .= '<tr>';
-$html .= '<td>' . $paidResult[0]['invoice_date'] . '</td>';
+$html .= '<td>' . $paidResult['invoice_date'] ?? '' . '</td>';
 $html .= '<td><b>Opening Balance</b></td>';
 $html .= '<td></td>
           <td></td>';
-$html .= '<td><b>' . number_format(0, 2) . '</b></td>';
-$html .= '<td></td>
-            </tr>';
+if (0 > $openingBalance) {
+    $html .= '<td></td>
+            <td><b>' . number_format($openingBalance, 2) . '</b></td>';
+} else {
+    $html .= '<td><b>' . number_format($openingBalance, 2) . '</b></td>
+            <td></td>';
+}
+$html .= '</tr>';
 $totalPendingForPay = 0;
-$totalPendingForPay += 0;
-$totalCollection = 0;
+$totalPendingForPay += $totalPendingAmount;
+$totalCollection = $openingBalance;
 $paidArray = array();
 foreach ($orderByDate as $date) {
     if (!in_array($date, $paidArray)) {
         $paidArray[] = $date;
-        $cQuery = "SELECT * FROM bill_details where ";
+        $cQuery = "SELECT 
+                    bd.*,
+                    (
+                        SELECT GROUP_CONCAT(DISTINCT tax ORDER BY tax)
+                        FROM bill_product_details bpd
+                        WHERE bpd.bill_id = bd.bill_id
+                    ) AS all_taxes
+                FROM bill_details bd ";
+        $where = [];
         if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-            $cQuery = $cQuery . "client_name like '%" . $customerName . "%'";
+            $where[] = " bd.client_id like " . $customerId;
         }
         if (isset($_GET['invoiceDate']) && trim($_GET['invoiceDate']) != '') {
-            $cQuery = $cQuery . 'AND DATE(invoice_date) >= "' . $date . '" AND DATE(invoice_date) <= "' . $date . '"';
+            $where[] = ' DATE(bd.invoice_date) >= "' . $date . '" AND DATE(bd.invoice_date) <= "' . $date . '"';
         }
+        if (isset($where) && !empty($where))
+            $cQuery .= "WHERE " . implode(" AND ", $where);
         $cResult = $db->rawQuery($cQuery);
+        // echo "<pre>";print_r()
         foreach ($cResult as $invoice) {
-            $html .= '<tr>';
-            $html .= '<td>' . date("d-M-Y", strtotime($date)) . 'To</td>';
-            $html .= '<td>Gst @ 18%</td>
+            if (!isset($paid2Array) || !in_array($invoice['bill_id'], $paid2Array)) {
+                $paid2Array[] = $invoice['bill_id'];
+                $html .= '<tr>';
+                $html .= '<td>' . date("d-M-Y", strtotime($date)) . 'To</td>';
+                $html .= '<td>Gst @ ' . $invoice['all_taxes'] ?? 18 . '%</td>
                             <td>Customer get sales</td>';
-            $html .= '<td>' . $invoice['invoice_no'] . '</td>';
-            $html .= '<td>' . number_format($invoice['total_amount'], 2) . '</td>
+                $html .= '<td>' . $invoice['invoice_no'] . '</td>';
+                $html .= '<td>' . number_format($invoice['total_amount'], 2) . '</td>
                             <td></td>
                         </tr>';
+                $totalPendingForPay += isset($invoice['total_amount']) ? $invoice['total_amount'] : 0;
+            }
         }
-        $totalPendingForPay += isset($invoice['total_amount']) ? $invoice['total_amount'] : 0;
-
         $bQuery = "SELECT * FROM bill_details as b INNER JOIN paid_details as pd ON pd.bill_id=b.bill_id where ";
         if (isset($_GET['customerId']) && trim($_GET['customerId']) != '') {
-            $bQuery = $bQuery . "client_name like '%" . $customerName . "%'";
+            $bQuery = $bQuery . "b.client_id like " . $customerId . "";
         }
         if (isset($_GET['invoiceDate']) && trim($_GET['invoiceDate']) != '') {
             $bQuery = $bQuery . 'AND DATE(invoice_date) >= "' . $date . '" AND DATE(invoice_date) <= "' . $date . '"';
         }
         $bResult = $db->rawQuery($bQuery);
         foreach ($bResult as $invoice) {
-            $html .= '<tr>';
-            $html .= '<td>' . date("d-M-Y", strtotime($date)) . ' By</td>';
-            $html .= '<td>' . $invoice['pay_option'] . '</td>';
-            $html .= '<td>Receipt</td>';
-            $html .= '<td>' . $invoice['invoice_no'] . '</td>';
-            $html .= '<td></td>';
-            $html .= '<td>' . number_format($invoice['paid_amount'], 2) . '</td>';
-            $html .= '</tr>';
+            if ((isset($invoice['bill_id']) && !empty($invoice['bill_id'])) && (!isset($paid3Array) || !in_array($invoice['bill_id'], $paid3Array))) {
+                $paid2Array[] = $invoice['paid_id'];
+                $paid3Array[] = $invoice['bill_id'];
+                $html .= '<tr>';
+                $html .= '<td>' . date("d-M-Y", strtotime($date)) . ' By</td>';
+                $html .= '<td>' . $invoice['pay_option'] . '</td>';
+                $html .= '<td>Receipt</td>';
+                $html .= '<td>' . $invoice['invoice_no'] . '</td>';
+                $html .= '<td></td>';
+                $html .= '<td>' . number_format($invoice['paid_amount'], 2) . '</td>';
+                $html .= '</tr>';
+                $totalCollection += $invoice['paid_amount'];
+            }
         }
-
-        $totalCollection += $invoice['paid_amount'];
     }
 }
 $html .= '<tr>';
 $html .= '<td></td><td><b>Closing Balance</b></td><td></td><td></td>';
-$html .= '<td style="color:red;"><b>' . number_format(($totalPendingForPay - $totalCollection), 2) . '</b></td>';
-$html .= '<td style="color:darkgreen;">' . number_format($totalCollection, 2) . '</td>';
+if (0 > $totalCollection) {
+    $total = ($totalCollection - $totalPendingForPay);
+    if (0 > $total) {
+        $html .= '<td style="color:red;"><b>0.00</b></td>';
+    } else {
+        $html .= '<td style="color:red;"><b>' . number_format((($totalPendingForPay - $totalCollection)), 2) . '</b></td>';
+    }
+} else {
+    $html .= '<td style="color:red;"><b>' . number_format((($totalPendingForPay - $totalCollection)), 2) . '</b></td>';
+}
+$color = ($totalCollection < 0) ? 'red' : 'darkgreen';
+$html .= '<td style="color:' . $color . ';"><b> ' . number_format($totalCollection, 2) . '</b></td>';
+// $html .= '<td style="color:red;"><b>' . number_format(($totalPendingForPay - $totalCollection), 2) . '</b></td>';
+// $html .= '<td style="color:darkgreen;">' . number_format($totalCollection, 2) . '</td>';
 $html .= '</tr>';
 
 $html .= '</tbody>';
